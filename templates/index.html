@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kore Tatil Planlayıcısı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Google AdSense Kod -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7886535286713319" crossorigin="anonymous"></script>
+    
+    <!-- Mobil cihazlar için ekstra meta tag'ler -->
+    <meta name="theme-color" content="#5f27cd">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <script>
+    // Global variables
+    let currentStep = 1;
+    const totalSteps = 7;
+    
+    // Form submit function
+    function submitForm(event) {
+        event.preventDefault();
+        console.log("Form submit triggered");
+        
+        // Get form data
+        const tripForm = document.getElementById('tripForm');
+        const formData = new FormData(tripForm);
+        const data = {};
+        
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // Get interest checkboxes since they need special handling
+        data.interests = [];
+        document.querySelectorAll('.interest-check-input:checked').forEach(checkbox => {
+            data.interests.push(checkbox.value);
+        });
+        
+        // Validate form
+        if (!validateForm()) {
+            console.error("Form validation failed");
+            return;
+        }
+        
+        // Show loading animation
+        const resultsSection = document.getElementById('results');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const koreaLoadingAnimation = document.getElementById('koreaLoadingAnimation');
+        
+        resultsSection.style.display = 'block';
+        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = 'none';
+        }
+        
+        if (koreaLoadingAnimation) {
+            koreaLoadingAnimation.style.display = 'block';
+        }
+        
+        // Scroll to results section
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+        
+        console.log("Sending data to backend:", data);
+        
+        // Send data to backend
+        fetch('/generate_plan', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            console.log("Received response:", responseData);
+            
+            if (responseData.success) {
+                // Update UI with plan
+                const travelPlan = document.getElementById('travelPlan');
+                if (travelPlan) {
+                    // Hide loading spinner
+                    if (loadingSpinner) {
+                        loadingSpinner.style.display = 'none';
+                    }
+                    
+                    // Display formatted plan
+                    travelPlan.innerHTML = responseData.plan;
+                    travelPlan.style.display = 'block';
+                    
+                    // Update summary if available
+                    if (responseData.summary) {
+                        updateSummary(responseData);
+                    }
+                }
+            } else {
+                console.error("Error from server:", responseData.error);
+                showError("Plan oluşturulamadı", responseData.error || "Beklenmeyen bir hata oluştu.");
+            }
+        })
+        .catch(error => {
+            console.error("Fetch error:", error);
+            showError("Bağlantı hatası", "Sunucu ile iletişim kurulurken bir hata oluştu.");
+        });
+    }
+    
+    // Form validation
+    function validateForm() {
+        let isValid = true;
+        
+        // Check budget first as it's particularly problematic
+        const budgetInput = document.getElementById('budget');
+        if (!budgetInput || !budgetInput.value) {
+            console.error("Budget input is missing or empty");
+            alert("Lütfen bir bütçe seçin");
+            isValid = false;
+        } else {
+            console.log("Budget validation passed:", budgetInput.value);
+        }
+        
+        // Check required fields
+        const duration = document.getElementById('duration').value;
+        const season = document.getElementById('season').value;
+        const travel_style = document.getElementById('travel_style').value;
+        const food_preferences = document.getElementById('food_preferences').value;
+        const accommodation = document.getElementById('accommodation').value;
+        
+        // Check if interests are selected
+        const checkedInterests = document.querySelectorAll('.interest-check-input:checked');
+        const interestsFeedback = document.querySelector('.interests-feedback');
+        
+        if (checkedInterests.length === 0) {
+            interestsFeedback.style.display = 'block';
+            isValid = false;
+        }
+        
+        // Check all required fields
+        if (!duration || !season || !travel_style || !food_preferences || !accommodation) {
+            console.error("Missing required fields");
+            isValid = false;
+            
+            // Show helpful message to user
+            alert("Lütfen tüm gerekli alanları doldurun. Eksik seçimler var.");
+        }
+        
+        return isValid;
+    }
+    
+    // Helper function to update summary
+    function updateSummary(data) {
+        // Update summary in results section
+        const summaryBudget = document.getElementById('summaryBudget');
+        const summaryDuration = document.getElementById('summaryDuration');
+        const summaryStyle = document.getElementById('summaryStyle');
+        const summarySeason = document.getElementById('summarySeason');
+        const planCreationDate = document.getElementById('planCreationDate');
+        
+        if (data.summary) {
+            if (summaryBudget) summaryBudget.textContent = `$${data.summary.budget}`;
+            if (summaryDuration) summaryDuration.textContent = `${data.summary.duration} gün`;
+            
+            if (summaryStyle) {
+                let styleText = data.summary.style;
+                switch (data.summary.style) {
+                    case 'Luxury': styleText = 'Lüks'; break;
+                    case 'Moderate': styleText = 'Orta Seviye'; break;
+                    case 'Budget': styleText = 'Ekonomik'; break;
+                    case 'Backpacking': styleText = 'Sırt Çantalı'; break;
+                }
+                summaryStyle.textContent = styleText;
+            }
+            
+            if (summarySeason) {
+                let seasonText = data.summary.season;
+                if (seasonText.includes('Spring')) seasonText = 'İlkbahar';
+                else if (seasonText.includes('Summer')) seasonText = 'Yaz';
+                else if (seasonText.includes('Fall')) seasonText = 'Sonbahar';
+                else if (seasonText.includes('Winter')) seasonText = 'Kış';
+                summarySeason.textContent = seasonText;
+            }
+        }
+        
+        if (planCreationDate) {
+            planCreationDate.textContent = `Plan oluşturulma tarihi: ${data.date || new Date().toLocaleDateString('tr-TR')}`;
+        }
+    }
+    
+    // Helper function to display error
+    function showError(title, message) {
+        const resultsSection = document.getElementById('results');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const travelPlan = document.getElementById('travelPlan');
+        
+        if (loadingSpinner) {
+            loadingSpinner.style.display = 'none';
+        }
+        
+        if (travelPlan) {
+            travelPlan.innerHTML = `
+                <div class="alert alert-danger">
+                    <h4 class="alert-heading">${title}</h4>
+                    <p>${message}</p>
+                    <hr>
+                    <p class="mb-0">Lütfen tekrar deneyin veya farklı tercihlerle yeniden başlayın.</p>
+                </div>
+            `;
+            travelPlan.style.display = 'block';
+        }
+    }
+    
+    // Progress bar functions
+    function updateProgressBar() {
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar) {
+            const progressPercentage = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            progressBar.setAttribute('aria-valuenow', progressPercentage);
+        }
+    }
+    
+    function updateProgressSteps(stepNumber) {
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const progressLines = document.querySelectorAll('.progress-line');
+        
+        progressSteps.forEach((step, index) => {
+            // Convert from 1-based to 0-based indexing
+            const stepNum = index + 1;
+            
+            // Reset all steps
+            step.classList.remove('active', 'completed');
+            step.querySelector('.step-icon').classList.remove('active', 'completed');
+            
+            // Mark completed steps
+            if (stepNum < stepNumber) {
+                step.classList.add('completed');
+                step.querySelector('.step-icon').classList.add('completed');
+                step.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+            } 
+            // Mark active step
+            else if (stepNum === stepNumber) {
+                step.classList.add('active');
+                step.querySelector('.step-icon').classList.add('active');
+                step.querySelector('.step-icon').innerHTML = stepNum;
+            } 
+            // Reset future steps
+            else {
+                step.querySelector('.step-icon').innerHTML = stepNum;
+            }
+        });
+        
+        // Update progress lines
+        progressLines.forEach((line, index) => {
+            // Reset all lines
+            line.classList.remove('active');
+            
+            // Mark completed lines (those before the current step)
+            if (index < stepNumber - 1) {
+                line.classList.add('active');
+            }
+        });
+    }
+    
+    // Navigation function
+    function gotoStep(stepNumber) {
+        console.log("Going to step:", stepNumber);
+        
+        // Hide all steps
+        document.querySelectorAll('.step').forEach(step => {
+            step.style.display = 'none';
+        });
+        
+        // Show target step
+        const targetStep = document.querySelector(`.step[data-step="${stepNumber}"]`);
+        if (targetStep) {
+            targetStep.style.display = 'block';
+            
+            // Update currentStep variable
+            currentStep = stepNumber;
+            
+            // Update progress indicators
+            updateProgressBar();
+            updateProgressSteps(stepNumber);
+        } else {
+            console.error(`Step ${stepNumber} not found`);
+        }
+    }
+    
+    // Duration selection functions
+    function selectDuration(element, value) {
+        console.log("Duration seçildi:", value);
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.duration-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        element.classList.add('selected');
+        
+        // Update hidden input
+        const durationInput = document.getElementById('duration');
+        if (durationInput) {
+            durationInput.value = value;
+        }
+        
+        // Update summary pill if exists
+        const summaryDurationPill = document.getElementById('summaryDurationPill');
+        if (summaryDurationPill) {
+            summaryDurationPill.textContent = `${value} gün`;
+            summaryDurationPill.style.display = 'inline-block';
+        }
+        
+        // Clear custom duration input if exists
+        const customDurationInput = document.getElementById('customDuration');
+        if (customDurationInput) {
+            customDurationInput.value = '';
+        }
+    }
+
+    function activateCustomDuration(element) {
+        console.log("Custom duration aktifleştirildi");
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.duration-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to custom option
+        element.classList.add('selected');
+        
+        // Focus on custom input
+        const customDurationInput = document.getElementById('customDuration');
+        if (customDurationInput) {
+            customDurationInput.focus();
+        }
+    }
+
+    function setCustomDuration(value) {
+        if (value && Number(value) > 0) {
+            console.log("Custom duration ayarlandı:", value);
+            
+            // Update hidden input
+            const durationInput = document.getElementById('duration');
+            if (durationInput) {
+                durationInput.value = value;
+            }
+            
+            // Update summary pill if exists
+            const summaryDurationPill = document.getElementById('summaryDurationPill');
+            if (summaryDurationPill) {
+                summaryDurationPill.textContent = `${value} gün`;
+                summaryDurationPill.style.display = 'inline-block';
+            }
+        }
+    }
+    
+    // Season selection function
+    function selectSeason(element, value) {
+        console.log("Season seçildi:", value);
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.season-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        element.classList.add('selected');
+        
+        // Update hidden input value
+        const seasonInput = document.getElementById('season');
+        if (seasonInput) {
+            seasonInput.value = value;
+        }
+        
+        // Update summary pill
+        const summarySeasonPill = document.getElementById('summarySeasonPill');
+        if (summarySeasonPill) {
+            const seasonLabel = element.querySelector('.season-info h5').textContent;
+            summarySeasonPill.textContent = seasonLabel;
+            summarySeasonPill.style.display = 'inline-block';
+        }
+    }
+    
+    // Travel style selection function
+    function selectTravelStyle(element, value) {
+        console.log("Travel style seçildi:", value);
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.travel-style-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        element.classList.add('selected');
+        
+        // Update hidden input value
+        const styleInput = document.getElementById('travel_style');
+        if (styleInput) {
+            styleInput.value = value;
+        }
+        
+        // Update summary pill
+        const summaryStylePill = document.getElementById('summaryStylePill');
+        if (summaryStylePill) {
+            const styleLabel = element.querySelector('.style-details h5').textContent;
+            summaryStylePill.textContent = styleLabel;
+            summaryStylePill.style.display = 'inline-block';
+        }
+    }
+    
+    // Interest selection function
+    function toggleInterest(element) {
+        console.log("Interest toggled");
+        
+        const checkbox = element.querySelector('.interest-check-input');
+        element.classList.toggle('selected');
+        if (checkbox) {
+            checkbox.checked = element.classList.contains('selected');
+        }
+        
+        // Update feedback visibility
+        const checkedInterests = document.querySelectorAll('.interest-check-input:checked');
+        const interestsFeedback = document.querySelector('.interests-feedback');
+        if (interestsFeedback) {
+            interestsFeedback.style.display = checkedInterests.length === 0 ? 'block' : 'none';
+        }
+    }
+    
+    // Food preference selection function
+    function selectFood(element, value) {
+        console.log("Food preference seçildi:", value);
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.food-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        element.classList.add('selected');
+        
+        // Update hidden input value
+        const foodInput = document.getElementById('food_preferences');
+        if (foodInput) {
+            foodInput.value = value;
+        }
+        
+        // Update summary pill
+        const summaryFoodPill = document.getElementById('summaryFoodPill');
+        if (summaryFoodPill) {
+            const foodLabel = element.querySelector('.food-details h5').textContent;
+            summaryFoodPill.textContent = foodLabel;
+            summaryFoodPill.style.display = 'inline-block';
+        }
+    }
+    
+    // Accommodation selection function
+    function selectAccommodation(element, value) {
+        console.log("Accommodation seçildi:", value);
+        
+        // Remove selected class from all options
+        document.querySelectorAll('.accommodation-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        element.classList.add('selected');
+        
+        // Update hidden input value
+        const accommodationInput = document.getElementById('accommodation');
+        if (accommodationInput) {
+            accommodationInput.value = value;
+        }
+        
+        // Update summary pill
+        const summaryAccommodationPill = document.getElementById('summaryAccommodationPill');
+        if (summaryAccommodationPill) {
+            const accommodationLabel = element.querySelector('.accommodation-name').textContent;
+            summaryAccommodationPill.textContent = accommodationLabel;
+            summaryAccommodationPill.style.display = 'inline-block';
+        }
+    }
+    
+    // Show planner section
+    function showPlannerSection() {
+        console.log("showPlannerSection çağrıldı");
+        const plannerSection = document.getElementById('plannerSection');
+        
+        if (plannerSection) {
+            plannerSection.setAttribute('style', 'display: block !important; visibility: visible !important; opacity: 1 !important; overflow-x: visible !important;');
+            plannerSection.scrollIntoView({ behavior: 'smooth' });
+            console.log("plannerSection görünür hale getirildi ve kaydırıldı");
+        } else {
+            console.error("plannerSection elementi bulunamadı!");
+        }
+    }
+    
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM loaded, initializing form");
+        // Initialize progress bar
+        updateProgressBar();
+        updateProgressSteps(currentStep);
+        
+        // Add event listeners for PDF buttons
+        const downloadPlanBtn = document.getElementById('downloadPlanBtn');
+        const koreanPdfBtn = document.getElementById('koreanPdfBtn');
+        
+        if (downloadPlanBtn) {
+            downloadPlanBtn.addEventListener('click', function() {
+                generatePDF(false); // Regular plan PDF
+            });
+        }
+        
+        if (koreanPdfBtn) {
+            koreanPdfBtn.addEventListener('click', function() {
+                generatePDF(true); // Korean immigration plan PDF
+            });
+        }
+        
+        // Make sure the budget input is being correctly set
+        const budgetOptions = document.querySelectorAll('.budget-option');
+        budgetOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const budgetValue = this.getAttribute('data-budget');
+                console.log("Budget option clicked:", budgetValue);
+                
+                // Set the budget input value
+                const budgetInput = document.getElementById('budget');
+                if (budgetInput) {
+                    budgetInput.value = budgetValue;
+                    console.log("Budget input value set to:", budgetInput.value);
+                }
+            });
+        });
+        
+        // Handle custom budget input
+        const customBudgetInput = document.getElementById('customBudget');
+        if (customBudgetInput) {
+            customBudgetInput.addEventListener('input', function() {
+                const budgetInput = document.getElementById('budget');
+                if (budgetInput) {
+                    budgetInput.value = this.value;
+                    console.log("Budget input value set to:", budgetInput.value);
+                }
+            });
+        }
+    });
+
+    // Make sure budget is properly initialized and updated
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("DOM fully loaded, initializing budget handling");
+        
+        // Handle budget options
+        const budgetOptions = document.querySelectorAll('.budget-option');
+        const budgetInput = document.getElementById('budget');
+        
+        // Set initial budget value and display
+        if (budgetInput) {
+            console.log("Initial budget value:", budgetInput.value);
+            
+            // Update budget display
+            const summaryBudgetPill = document.getElementById('summaryBudgetPill');
+            if (summaryBudgetPill) {
+                summaryBudgetPill.textContent = `$${budgetInput.value}`;
+                summaryBudgetPill.style.display = 'inline-block';
+            }
+        }
+        
+        // Handle budget option clicks
+        budgetOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const value = this.getAttribute('data-budget');
+                if (value) {
+                    selectBudget(this, value);
+                }
+            });
+        });
+        
+        // Handle custom budget
+        const customBudgetInput = document.getElementById('customBudget');
+        if (customBudgetInput) {
+            customBudgetInput.addEventListener('input', function() {
+                if (this.value && Number(this.value) > 0) {
+                    setCustomBudget(this.value);
+                }
+            });
+        }
+    });
+
+    // Restart function
+    function startOver() {
+        window.location.reload();
+    }
+
+    // Yükleme animasyonu için ek kod
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form submit olduğunda normal spinner yerine Kore animasyonu göster
+        const tripForm = document.getElementById('tripForm');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const koreaLoadingAnimation = document.getElementById('koreaLoadingAnimation');
+        
+        if (tripForm) {
+            const originalSubmit = tripForm.onsubmit;
+            tripForm.onsubmit = function(event) {
+                if (loadingSpinner && koreaLoadingAnimation) {
+                    loadingSpinner.style.display = 'none';
+                    koreaLoadingAnimation.style.display = 'block';
+                }
+                
+                // Orijinal form submit fonksiyonunu çağır
+                if (typeof originalSubmit === 'function') {
+                    return originalSubmit.call(this, event);
+                }
+            };
+        }
+        
+        // Eğer submitForm fonksiyonu varsa onu extend et
+        if (typeof submitForm === 'function') {
+            const originalSubmitForm = submitForm;
+            window.submitForm = function(event) {
+                if (loadingSpinner && koreaLoadingAnimation) {
+                    loadingSpinner.style.display = 'none';
+                    koreaLoadingAnimation.style.display = 'block';
+                }
+                
+                // Orijinal submitForm fonksiyonunu çağır
+                return originalSubmitForm(event);
+            };
+        }
+    });
+    </script>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <!-- Hero Banner -->
+        <section id="welcomeBanner" class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="hero-title">Kore Tatil Planlayıcısı</h1>
+                    <p class="hero-subtitle">Güney Kore seyahatinizin tam ihtiyaçlarınıza ve tercihlerinize göre özelleştirilmiş günlük planını hızlıca oluşturun.</p>
+                    
+                    <!-- Google AdSense için yatay reklam alanı -->
+                    <div class="ad-container text-center mb-4">
+                        <div class="ad-label small text-muted mb-1">Sponsorlu İçerik</div>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-7886535286713319"
+                             data-ad-slot="XXXXXXXXXX"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    
+                    <button id="startPlanningBtn" class="btn btn-hero" onclick="showPlannerSection()">Planlamaya Başla</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Korea Section -->
+        <section id="aboutKorea" class="about-section py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="about-image-wrapper">
+                            <div class="about-image-main"></div>
+                            <div class="about-image-accent"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <h2 class="section-title">Kore'de Unutulmaz Bir Tatil İçin</h2>
+                            <p>Kore'nin büyüleyici kültürü, lezzetli mutfağı ve etkileyici manzaralarıyla dolu bir tatil planlıyorsunuz. Sizin için mükemmel bir gezi planı oluşturmamıza yardımcı olun!</p>
+                            <p>Tatil tercihleri anketini doldurarak kişiselleştirilmiş tatil önerileri alın. Bütçenize, ilgi alanlarınıza ve tatil tarzınıza göre özel olarak hazırlanmış bir seyahat planı sunuyoruz.</p>
+                            
+                            <div class="about-highlights mt-4">
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h4>Benzersiz Mutfak</h4>
+                                        <p>Otantik Kore sokak yemeklerinden Michelin yıldızlı restoranlara kadar geniş lezzet seçenekleri.</p>
+                                    </div>
+                                </div>
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-mountain"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h4>Doğal Güzellikler</h4>
+                                        <p>Etkileyici dağlar, sakin plajlar ve büyüleyici milli parklarla dolu doğal manzaralar.</p>
+                                    </div>
+                                </div>
+                                <div class="highlight-item">
+                                    <div class="highlight-icon">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+                                    <div class="highlight-text">
+                                        <h4>Zengin Kültür</h4>
+                                        <p>Tarihi saraylardan modern K-Pop kültürüne uzanan zengin bir kültürel deneyim.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="koreaInfoSection" class="korea-info-section py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">Kore Seyahati İpuçları</h2>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fas fa-subway"></i>
+                            </div>
+                            <h3>Ulaşım İpuçları</h3>
+                            <ul class="info-list">
+                                <li><strong>T-Money Kartı:</strong> Seul'de ilk iş olarak bir T-Money kartı satın alın. Metro, otobüs ve taksilerde kullanılabilir.</li>
+                                <li><strong>Metro Uygulaması:</strong> "Kakao Metro" uygulamasını indirin. İngilizce arayüzü ile metro navigasyonu kolaylaştırır.</li>
+                                <li><strong>Taksi İpucu:</strong> Taksilerde her zaman adresinizin Korece yazılı olduğu bir kağıt bulundurun.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h3>İletişim ve Dil</h3>
+                            <div class="korean-phrases">
+                                <div class="phrase-item">
+                                    <span class="korean-text">안녕하세요</span>
+                                    <span class="phrase-meaning">Annyeonghaseyo: Merhaba</span>
+                                </div>
+                                <div class="phrase-item">
+                                    <span class="korean-text">감사합니다</span>
+                                    <span class="phrase-meaning">Kamsahamnida: Teşekkür ederim</span>
+                                </div>
+                                <div class="phrase-item">
+                                    <span class="korean-text">얼마예요</span>
+                                    <span class="phrase-meaning">Eolmayeyo: Ne kadar?</span>
+                                </div>
+                                <div class="phrase-item">
+                                    <span class="korean-text">화장실이 어디예요</span>
+                                    <span class="phrase-meaning">Hwajangsil-i eodiyeyo: Tuvalet nerede?</span>
+                                </div>
+                            </div>
+                            <p class="mt-3"><strong>İpucu:</strong> "Papago" veya "Naver" çeviri uygulamalarını indirin. Google Translate'den Korece için daha doğru çeviriler yaparlar.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fas fa-hand-peace"></i>
+                            </div>
+                            <h3>Kültürel İncelikler</h3>
+                            <ul class="info-list">
+                                <li>Yaşlılara her zaman iki elinizle içecek veya yiyecek verin (saygı göstergesi).</li>
+                                <li>Çubuklarınızı asla pirince dikey olarak saplamayın (cenaze ritüelini anımsatır).</li>
+                                <li>Tapınaklarda ve bazı restoranlarda ayakkabılarınızı çıkarmanız gerekebilir.</li>
+                                <li>Koreliler için "hayır" demek zordur, dolaylı cevapları anlayabilmeniz gerekebilir.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5">
+                    <button id="scrollToPlannerBtn" class="btn btn-outline-primary" onclick="showPlannerSection()">Tatil Planlamasına Başla</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Survey Form Section -->
+        <section id="plannerSection" class="planner-section py-5" style="display: block;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <!-- Survey Form -->
+                        <div class="card survey-card">
+                            <div class="card-body p-4">
+                                <h2 class="card-title text-center mb-4">Rüya Kore Seyahatinizi Planlayın</h2>
+                                <p class="text-center text-muted mb-5">Tercihleri seçerek size özel seyahat planı oluşturalım.</p>
+                                <form id="tripForm" class="needs-validation" novalidate>
+                                    <div class="progress-container mb-5">
+                                        <div class="progress-steps">
+                                            <div class="progress-step" data-step="1">
+                                                <div class="step-icon active">1</div>
+                                                <div class="step-label">Bütçe</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="2">
+                                                <div class="step-icon">2</div>
+                                                <div class="step-label">Süre</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="3">
+                                                <div class="step-icon">3</div>
+                                                <div class="step-label">Mevsim</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="4">
+                                                <div class="step-icon">4</div>
+                                                <div class="step-label">Tarz</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="5">
+                                                <div class="step-icon">5</div>
+                                                <div class="step-label">İlgi</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="6">
+                                                <div class="step-icon">6</div>
+                                                <div class="step-label">Yemek</div>
+                                            </div>
+                                            <div class="progress-line"></div>
+                                            <div class="progress-step" data-step="7">
+                                                <div class="step-icon">7</div>
+                                                <div class="step-label">Konaklama</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Multi-step form -->
+                                    <div class="form-steps">
+                                        <!-- Step 1: Budget -->
+                                        <div class="step" data-step="1">
+                                            <h3 class="h5 mb-4 step-title">Bütçenizi Belirleyin <span class="step-counter">1/7</span></h3>
+                                            <p class="text-muted mb-4">Kore'de sunabileceğimiz deneyimler bütçenize göre şekillenecektir.</p>
+                                            <div class="mb-4">
+                                                <div class="budget-options">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3 col-6">
+                                                            <div class="budget-option" data-budget="1000" onclick="selectBudget(this, '1000')">
+                                                                <div class="budget-icon">
+                                                                    <i class="fas fa-coins"></i>
+                                                                </div>
+                                                                <div class="budget-amount">$1000</div>
+                                                                <div class="budget-description">Ekonomik</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-6">
+                                                            <div class="budget-option" data-budget="2000" onclick="selectBudget(this, '2000')">
+                                                                <div class="budget-icon">
+                                                                    <i class="fas fa-coins"></i>
+                                                                </div>
+                                                                <div class="budget-amount">$2000</div>
+                                                                <div class="budget-description">Standart</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-6">
+                                                            <div class="budget-option" data-budget="3000" onclick="selectBudget(this, '3000')">
+                                                                <div class="budget-icon">
+                                                                    <i class="fas fa-coins"></i>
+                                                                </div>
+                                                                <div class="budget-amount">$3000</div>
+                                                                <div class="budget-description">Konforlu</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-6">
+                                                            <div class="budget-option" data-budget="5000" onclick="selectBudget(this, '5000')">
+                                                                <div class="budget-icon">
+                                                                    <i class="fas fa-gem"></i>
+                                                                </div>
+                                                                <div class="budget-amount">$5000</div>
+                                                                <div class="budget-description">Lüks</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="budget-option custom-budget" onclick="activateCustomBudget(this)">
+                                                                <div class="budget-icon">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </div>
+                                                                <div class="budget-amount">Özel</div>
+                                                                <div class="budget-description">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">$</span>
+                                                                        <input type="number" class="form-control" id="customBudget" placeholder="Miktar" min="100" onchange="setCustomBudget(this.value)">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="budget" name="budget" value="3000" required>
+                                                    <div class="invalid-feedback text-center mt-2">Lütfen bir bütçe seçin.</div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-nav-container">
+                                                <div></div> <!-- Boş div solda boşluk oluşturmak için -->
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(2);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 2: Duration -->
+                                        <div class="step" data-step="2" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">Seyahat Süresini Seçin <span class="step-counter">2/7</span></h3>
+                                            <p class="text-muted mb-4">Seyahatinizin süresine göre gezi programınızı şekillendireceğiz.</p>
+                                            <div class="mb-4">
+                                                <div class="duration-options">
+                                                    <div class="row g-4">
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option" data-duration="3" onclick="selectDuration(this, 3)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-calendar-day"></i>
+                                                                </div>
+                                                                <div class="duration-value">3 Gün</div>
+                                                                <div class="duration-label">Kısa Tatil</div>
+                                                                <p class="text-muted small mt-2">Kore'nin öne çıkan noktaları</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option" data-duration="7" onclick="selectDuration(this, 7)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-calendar-week"></i>
+                                                                </div>
+                                                                <div class="duration-value">7 Gün</div>
+                                                                <div class="duration-label">Haftalık</div>
+                                                                <p class="text-muted small mt-2">Seul ve çevresini keşfedin</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option" data-duration="10" onclick="selectDuration(this, 10)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-calendar-alt"></i>
+                                                                </div>
+                                                                <div class="duration-value">10 Gün</div>
+                                                                <div class="duration-label">Uzun Tatil</div>
+                                                                <p class="text-muted small mt-2">Seul ve başka bir şehri ekleyin</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option" data-duration="14" onclick="selectDuration(this, 14)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-calendar"></i>
+                                                                </div>
+                                                                <div class="duration-value">14 Gün</div>
+                                                                <div class="duration-label">İki Hafta</div>
+                                                                <p class="text-muted small mt-2">Kuzey ve Güney Kore turu</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option" data-duration="21" onclick="selectDuration(this, 21)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-calendar-plus"></i>
+                                                                </div>
+                                                                <div class="duration-value">21 Gün</div>
+                                                                <div class="duration-label">Üç Hafta</div>
+                                                                <p class="text-muted small mt-2">Derin Kore deneyimi</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="duration-option custom-option" data-duration="custom" onclick="activateCustomDuration(this)">
+                                                                <div class="duration-icon">
+                                                                    <i class="fas fa-sliders-h"></i>
+                                                                </div>
+                                                                <div class="duration-value">Özel</div>
+                                                                <div class="duration-input">
+                                                                    <input type="number" class="form-control form-control-sm mt-2" id="customDuration" min="1" max="30" placeholder="1-30" onchange="setCustomDuration(this.value)">
+                                                                </div>
+                                                                <p class="text-muted small mt-2">Size özel süre</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="duration" name="duration" value="7" required>
+                                                    <div class="invalid-feedback text-center mt-2">Lütfen bir seyahat süresi seçin veya belirleyin.</div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-nav-container">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(1);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(3);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 3: Season -->
+                                        <div class="step" data-step="3" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">Tatil Mevsimini Seçin <span class="step-counter">3/7</span></h3>
+                                            <p class="text-muted mb-4">Her mevsimde farklı deneyimler yaşayacağınız Kore, yıl boyunca ziyaretçileri için farklı güzellikler sunar.</p>
+                                            <div class="mb-4">
+                                                <div class="row g-4 season-options">
+                                                    <div class="col-md-6">
+                                                        <div class="season-option" data-season="Spring (March-May)" onclick="selectSeason(this, 'Spring (March-May)')">
+                                                            <div class="season-image spring-image">
+                                                                <div class="season-overlay"></div>
+                                                                <div class="season-name">İlkbahar</div>
+                                                            </div>
+                                                            <div class="season-info">
+                                                                <h5>İlkbahar (Mart-Mayıs)</h5>
+                                                                <p class="mb-2 text-muted small">Kiraz çiçekleri ve ılıman hava</p>
+                                                                <div class="season-features">
+                                                                    <span class="badge bg-light text-dark">Kiraz Festivali</span>
+                                                                    <span class="badge bg-light text-dark">15-25°C</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="season-option" data-season="Summer (June-August)" onclick="selectSeason(this, 'Summer (June-August)')">
+                                                            <div class="season-image summer-image">
+                                                                <div class="season-overlay"></div>
+                                                                <div class="season-name">Yaz</div>
+                                                            </div>
+                                                            <div class="season-info">
+                                                                <h5>Yaz (Haziran-Ağustos)</h5>
+                                                                <p class="mb-2 text-muted small">Canlı festivaller ve plaj zamanı</p>
+                                                                <div class="season-features">
+                                                                    <span class="badge bg-light text-dark">Su Festivalleri</span>
+                                                                    <span class="badge bg-light text-dark">25-35°C</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="season-option" data-season="Fall (September-November)" onclick="selectSeason(this, 'Fall (September-November)')">
+                                                            <div class="season-image fall-image">
+                                                                <div class="season-overlay"></div>
+                                                                <div class="season-name">Sonbahar</div>
+                                                            </div>
+                                                            <div class="season-info">
+                                                                <h5>Sonbahar (Eylül-Kasım)</h5>
+                                                                <p class="mb-2 text-muted small">Renkli yapraklar ve ideal sıcaklık</p>
+                                                                <div class="season-features">
+                                                                    <span class="badge bg-light text-dark">Yaprak Festivali</span>
+                                                                    <span class="badge bg-light text-dark">10-20°C</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="season-option" data-season="Winter (December-February)" onclick="selectSeason(this, 'Winter (December-February)')">
+                                                            <div class="season-image winter-image">
+                                                                <div class="season-overlay"></div>
+                                                                <div class="season-name">Kış</div>
+                                                            </div>
+                                                            <div class="season-info">
+                                                                <h5>Kış (Aralık-Şubat)</h5>
+                                                                <p class="mb-2 text-muted small">Kar manzaraları ve kış festivalleri</p>
+                                                                <div class="season-features">
+                                                                    <span class="badge bg-light text-dark">Kar Festivali</span>
+                                                                    <span class="badge bg-light text-dark">-5 - 5°C</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="season" name="season" required>
+                                                <div class="invalid-feedback text-center mt-2">Lütfen bir mevsim seçin.</div>
+                                            </div>
+                                            <div class="btn-nav-container">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(2);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(4);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 4: Travel Style -->
+                                        <div class="step" data-step="4" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">Seyahat Tarzını Seçin <span class="step-counter">4/7</span></h3>
+                                            <p class="text-muted mb-4">Kişisel tercihlerinize göre seyahat deneyiminizi özelleştirelim.</p>
+                                            <div class="mb-4">
+                                                <div class="travel-style-options">
+                                                    <div class="row g-4">
+                                                        <div class="col-md-6">
+                                                            <div class="travel-style-option" data-style="Luxury" onclick="selectTravelStyle(this, 'Luxury')">
+                                                                <div class="style-icon">
+                                                                    <i class="fas fa-gem"></i>
+                                                                </div>
+                                                                <div class="style-details">
+                                                                    <h5>Lüks</h5>
+                                                                    <p>5 yıldızlı oteller ve premium deneyimler</p>
+                                                                    <div class="style-features mt-2">
+                                                                        <span class="badge bg-light text-dark">VIP Hizmetler</span>
+                                                                        <span class="badge bg-light text-dark">Özel Şoför</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="travel-style-option" data-style="Moderate" onclick="selectTravelStyle(this, 'Moderate')">
+                                                                <div class="style-icon">
+                                                                    <i class="fas fa-award"></i>
+                                                                </div>
+                                                                <div class="style-details">
+                                                                    <h5>Orta Seviye</h5>
+                                                                    <p>Konforlu ve kaliteli, makul fiyatlı seçenekler</p>
+                                                                    <div class="style-features mt-2">
+                                                                        <span class="badge bg-light text-dark">3-4 Yıldızlı</span>
+                                                                        <span class="badge bg-light text-dark">Rehberli Turlar</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="travel-style-option" data-style="Budget" onclick="selectTravelStyle(this, 'Budget')">
+                                                                <div class="style-icon">
+                                                                    <i class="fas fa-coins"></i>
+                                                                </div>
+                                                                <div class="style-details">
+                                                                    <h5>Ekonomik</h5>
+                                                                    <p>Makul fiyatlı ve değer odaklı seçenekler</p>
+                                                                    <div class="style-features mt-2">
+                                                                        <span class="badge bg-light text-dark">Toplu Taşıma</span>
+                                                                        <span class="badge bg-light text-dark">Uygun Oteller</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="travel-style-option" data-style="Backpacking" onclick="selectTravelStyle(this, 'Backpacking')">
+                                                                <div class="style-icon">
+                                                                    <i class="fas fa-hiking"></i>
+                                                                </div>
+                                                                <div class="style-details">
+                                                                    <h5>Sırt Çantalı</h5>
+                                                                    <p>Minimum bütçe, maksimum macera ve yerel deneyim</p>
+                                                                    <div class="style-features mt-2">
+                                                                        <span class="badge bg-light text-dark">Hostellerde Konaklama</span>
+                                                                        <span class="badge bg-light text-dark">Yerel Deneyimler</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="travel_style" name="travel_style" required>
+                                                    <div class="invalid-feedback text-center mt-2">Lütfen bir seyahat tarzı seçin.</div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-nav-container">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(3);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(5);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 5: Interests -->
+                                        <div class="step" data-step="5" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">İlgi Alanlarınızı Seçin <span class="step-counter">5/7</span></h3>
+                                            <div class="mb-4">
+                                                <div class="interests-options">
+                                                    <p class="text-center mb-3">En az 1 seçenek işaretleyin (birden fazla seçebilirsiniz)</p>
+                                                    <div class="row g-3">
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="Culture & History" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-landmark"></i>
+                                                                </div>
+                                                                <div class="interest-name">Kültür & Tarih</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="Culture & History" id="culture" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="Nature & Outdoors" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-mountain"></i>
+                                                                </div>
+                                                                <div class="interest-name">Doğa & Açık Alan</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="Nature & Outdoors" id="nature" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="Food & Cuisine" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-utensils"></i>
+                                                                </div>
+                                                                <div class="interest-name">Yemek & Mutfak</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="Food & Cuisine" id="food" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="Shopping" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-shopping-bag"></i>
+                                                                </div>
+                                                                <div class="interest-name">Alışveriş</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="Shopping" id="shopping" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="K-Pop & Entertainment" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-music"></i>
+                                                                </div>
+                                                                <div class="interest-name">K-Pop & Eğlence</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="K-Pop & Entertainment" id="kpop" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-4">
+                                                            <div class="interest-option" data-interest="Adventure & Activities" onclick="toggleInterest(this)">
+                                                                <div class="interest-icon">
+                                                                    <i class="fas fa-running"></i>
+                                                                </div>
+                                                                <div class="interest-name">Macera & Aktiviteler</div>
+                                                                <div class="interest-check">
+                                                                    <i class="fas fa-check"></i>
+                                                                </div>
+                                                                <input type="checkbox" class="interest-check-input" value="Adventure & Activities" id="adventure" name="interests" style="display:none;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="interests-feedback text-danger text-center mt-2" style="display:none;">Lütfen en az bir ilgi alanı seçiniz.</div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(4);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(6);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 6: Food -->
+                                        <div class="step" data-step="6" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">Yemek Tercihlerinizi Seçin <span class="step-counter">6/7</span></h3>
+                                            <div class="mb-4">
+                                                <div class="food-options">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-6">
+                                                            <div class="food-option" data-food="Try all authentic Korean foods" onclick="selectFood(this, 'Try all authentic Korean foods')">
+                                                                <div class="food-image food-authentic"></div>
+                                                                <div class="food-details">
+                                                                    <h5>Otantik Kore Mutfağı</h5>
+                                                                    <p>Tüm otantik Kore yemeklerini denemek istiyorum</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="food-option" data-food="Mostly Korean food with some international options" onclick="selectFood(this, 'Mostly Korean food with some international options')">
+                                                                <div class="food-image food-mostly-korean"></div>
+                                                                <div class="food-details">
+                                                                    <h5>Çoğunlukla Kore</h5>
+                                                                    <p>Çoğunlukla Kore yemeği, bazı uluslararası seçenekler</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="food-option" data-food="Mix of Korean and international cuisine" onclick="selectFood(this, 'Mix of Korean and international cuisine')">
+                                                                <div class="food-image food-mix"></div>
+                                                                <div class="food-details">
+                                                                    <h5>Karışık</h5>
+                                                                    <p>Kore ve uluslararası mutfak karışımı</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="food-option" data-food="Vegetarian/Vegan options" onclick="selectFood(this, 'Vegetarian/Vegan options')">
+                                                                <div class="food-image food-veggie"></div>
+                                                                <div class="food-details">
+                                                                    <h5>Vejetaryen/Vegan</h5>
+                                                                    <p>Vejetaryen ve vegan seçenekler tercih ederim</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="food-option" data-food="Halal food options" onclick="selectFood(this, 'Halal food options')">
+                                                                <div class="food-image food-halal"></div>
+                                                                <div class="food-details">
+                                                                    <h5>Helal Gıda</h5>
+                                                                    <p>Sadece helal gıda seçeneklerini tercih ederim</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="food_preferences" name="food_preferences" required>
+                                                    <div class="invalid-feedback text-center mt-2">Lütfen bir yemek tercihi seçiniz.</div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(5);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="button" class="btn btn-primary next-btn" onclick="gotoStep(7);">Sonraki <i class="fas fa-arrow-right ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Step 7: Accommodation -->
+                                        <div class="step" data-step="7" style="display: none;">
+                                            <h3 class="h5 mb-4 step-title">Konaklama Tipini Seçin <span class="step-counter">7/7</span></h3>
+                                            <div class="mb-4">
+                                                <div class="accommodation-options">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Luxury Hotels" onclick="selectAccommodation(this, 'Luxury Hotels')">
+                                                                <div class="accommodation-image acc-luxury"></div>
+                                                                <div class="accommodation-name">Lüks Oteller</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Mid-range Hotels" onclick="selectAccommodation(this, 'Mid-range Hotels')">
+                                                                <div class="accommodation-image acc-midrange"></div>
+                                                                <div class="accommodation-name">Orta Seviye Oteller</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Budget Hotels" onclick="selectAccommodation(this, 'Budget Hotels')">
+                                                                <div class="accommodation-image acc-budget"></div>
+                                                                <div class="accommodation-name">Ekonomik Oteller</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Traditional Korean Hanok" onclick="selectAccommodation(this, 'Traditional Korean Hanok')">
+                                                                <div class="accommodation-image acc-hanok"></div>
+                                                                <div class="accommodation-name">Hanok (Geleneksel)</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Guesthouses/Hostels" onclick="selectAccommodation(this, 'Guesthouses/Hostels')">
+                                                                <div class="accommodation-image acc-hostel"></div>
+                                                                <div class="accommodation-name">Pansiyon/Hostel</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="accommodation-option" data-accommodation="Airbnb/Rental Apartments" onclick="selectAccommodation(this, 'Airbnb/Rental Apartments')">
+                                                                <div class="accommodation-image acc-airbnb"></div>
+                                                                <div class="accommodation-name">Airbnb/Kiralık</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="accommodation" name="accommodation" required>
+                                                    <div class="invalid-feedback text-center mt-2">Lütfen bir konaklama tipi seçiniz.</div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <button type="button" class="btn btn-outline-secondary prev-btn" onclick="gotoStep(6);"><i class="fas fa-arrow-left me-1"></i> Önceki</button>
+                                                <button type="submit" class="btn btn-success" onclick="submitForm(event)">Plan Oluştur <i class="fas fa-paper-plane ms-1"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Section (Hidden initially) -->
+                <div id="results" class="my-5" style="display: none;">
+                    <div class="card result-card">
+                        <div class="card-header plan-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2 class="card-title mb-0">Kore Seyahat Planınız</h2>
+                                    <p class="text-muted mb-0"><small id="planCreationDate"></small></p>
+                                </div>
+                                <div class="plan-type-badge">
+                                    <span id="regularPlanBadge" class="badge bg-primary">Normal Plan</span>
+                                    <span id="koreanPlanBadge" class="badge bg-secondary d-none">Göçmenlik Planı</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-body plan-content">
+                            <!-- Google AdSense için yatay reklam alanı -->
+                            <div class="ad-container text-center mb-4">
+                                <div class="ad-label small text-muted mb-1">Sponsorlu İçerik</div>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-7886535286713319"
+                                     data-ad-slot="XXXXXXXXXX"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-center mb-4">
+                                    <div id="loadingSpinner" class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Yükleniyor...</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Kore temalı yükleme animasyonu -->
+                                <div id="koreaLoadingAnimation" style="display:none;">
+                                    <div class="korea-loading">
+                                        <div class="korea-loading-circle"></div>
+                                        <div class="korea-loading-circle"></div>
+                                        <div class="korea-loading-circle"></div>
+                                        <div class="korea-loading-symbol"></div>
+                                    </div>
+                                    
+                                    <div class="loading-tips">
+                                        <h4>Seyahat planınız oluşturuluyor...</h4>
+                                        <p>Size özel Güney Kore deneyimi hazırlanıyor</p>
+                                        
+                                        <ul class="korea-tips-list">
+                                            <li>Korece'de "teşekkür ederim" = "감사합니다" (Kamsahamnida)</li>
+                                            <li>Kore sokak yemekleri dünyanın en lezzetlilerindendir</li>
+                                            <li>Seul metro sistemi dünyanın en iyilerindendir</li>
+                                            <li>Kore'de bahşiş kültürü yoktur</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- Travel Plan Content -->
+                                <div class="tab-content" id="planTabContent">
+                                    <div class="tab-pane fade show active" id="regularPlanContent" role="tabpanel" aria-labelledby="regularPlanTab">
+                                        <div id="travelPlan" class="travel-plan-content"></div>
+                                    </div>
+                                    <div class="tab-pane fade" id="koreanPlanContent" role="tabpanel" aria-labelledby="koreanPlanTab">
+                                        <!-- Korean plan content will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- İçerik ortasına reklam ekliyoruz -->
+                            <div class="ad-container text-center my-4">
+                                <div class="ad-label small text-muted mb-1">Sponsorlu İçerik</div>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-7886535286713319"
+                                     data-ad-slot="XXXXXXXXXX"
+                                     data-ad-format="auto"
+                                     data-full-width-responsive="true"></ins>
+                                <script>
+                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                            
+                            <!-- Plan Controls - bu kısmı yeniden ekliyoruz -->
+                            <div class="plan-controls">
+                                <ul class="nav nav-tabs mb-4 flex-nowrap" id="planTabs" role="tablist">
+                                    <li class="nav-item flex-fill" role="presentation">
+                                        <button class="nav-link active w-100" id="regularPlanTab" data-bs-toggle="tab" data-bs-target="#regularPlanContent" type="button" role="tab">
+                                            <i class="fas fa-route me-1 d-none d-sm-inline"></i>Normal Plan
+                                        </button>
+                                    </li>
+                                    <li class="nav-item flex-fill" role="presentation">
+                                        <button class="nav-link w-100" id="koreanPlanTab" data-bs-toggle="tab" data-bs-target="#koreanPlanContent" type="button" role="tab">
+                                            <i class="fas fa-passport me-1 d-none d-sm-inline"></i>Göçmenlik Planı
+                                        </button>
+                                    </li>
+                                </ul>
+                                
+                                <!-- Mobil uyumlu butonlar -->
+                                <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+                                    <button id="startOverBtn" class="btn btn-primary btn-control" onclick="startOver()">
+                                        <i class="fas fa-redo me-1"></i><span class="d-none d-sm-inline">Yeniden Başla</span>
+                                    </button>
+                                    <button id="printPlanBtn" class="btn btn-outline-secondary btn-control" onclick="window.print()">
+                                        <i class="fas fa-print me-1"></i><span class="d-none d-sm-inline">Yazdır</span>
+                                    </button>
+                                    <button id="downloadPlanBtn" class="btn btn-outline-success btn-control" onclick="generatePDF(false)">
+                                        <i class="fas fa-file-pdf me-1"></i><span class="d-none d-sm-inline">PDF İndir</span>
+                                    </button>
+                                    <button id="koreanPdfBtn" class="btn btn-outline-danger btn-control" onclick="generatePDF(true)">
+                                        <i class="fas fa-passport me-1"></i><span class="d-none d-sm-inline">Göçmenlik PDF</span>
+                                    </button>
+                                    <button id="shareBtn" class="btn btn-outline-info btn-control">
+                                        <i class="fas fa-share-alt me-1"></i><span class="d-none d-sm-inline">Paylaş</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Helpful Tips Section -->
+                    <div class="card helpful-tips-card mt-4">
+                        <div class="card-header bg-light">
+                            <h3 class="h5 mb-0">Kore Seyahati için Faydalı Bilgiler</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-wifi tip-icon"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="h6">İnternet Erişimi</h4>
+                                            <p class="small mb-0">Havaalanından bir WiFi donanımı kiralayın veya yerel SIM kart alın. Kore'de hızlı internet erişimi çok önemlidir.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-credit-card tip-icon"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="h6">Ödeme</h4>
+                                            <p class="small mb-0">Kredi kartları yaygın olarak kabul edilir, ancak küçük işletmeler ve sokak satıcılarında nakit bulundurmak faydalıdır.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-plug tip-icon"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="h6">Elektrik Prizi</h4>
+                                            <p class="small mb-0">Kore 220V ve tip C/F prizleri kullanır. Adaptör getirmeyi unutmayın.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-tshirt tip-icon"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h4 class="h6">Ne Giyilmeli?</h4>
+                                            <p class="small mb-0">Kore'de mevsimler belirgindir. İlkbahar ve sonbaharda katmanlı giyinin, yazın hafif kıyafetler, kışın kalın giysiler tercih edin.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer py-4 text-center">
+            <div class="container">
+                <!-- Google AdSense küçük dikdörtgen reklam -->
+                <div class="ad-container text-center mb-3">
+                    <div class="ad-label small text-muted mb-1">Sponsorlu İçerik</div>
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:250px"
+                         data-ad-client="ca-pub-7886535286713319"
+                         data-ad-slot="XXXXXXXXXX"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                
+                <p class="mb-0">© 2025 Kore Tatil Planlayıcısı | Tüm Hakları Saklıdır</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript dosyasını en sonda yükleyelim -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
