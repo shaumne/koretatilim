@@ -43,6 +43,18 @@ plan_cache = {}
 def index():
     return render_template('index.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/get_currency_rates', methods=['GET'])
 def get_currency_rates():
     try:
@@ -157,7 +169,7 @@ def generate_plan():
     print(f"Budget after processing: {budget}")
     
     # Create a cache key from the request data
-    cache_key = f"{budget}_{data.get('duration')}_{data.get('travel_style')}_{','.join(data.get('interests', []))}_{data.get('food_preferences')}_{data.get('accommodation')}_{data.get('season')}"
+    cache_key = f"{budget}_{data.get('duration')}_{data.get('travel_style')}_{','.join(data.get('interests', []))}_{data.get('food_preferences')}_{data.get('accommodation')}_{data.get('season')}_{data.get('travel_group', 'Solo')}_{data.get('travel_pace', 'Balanced')}_{data.get('cities', 'Seoul')}"
     
     # Check if we have this plan cached
     if cache_key in plan_cache:
@@ -165,27 +177,82 @@ def generate_plan():
     
     # Format the prompt for DeepSeek AI with proper Turkish characters
     prompt = f"""
-    Güney Kore'ye aşağıdaki tercihlerimle bir seyahat planlıyorum:
+    ### ROL ###
+    Sen, Türkiye'den gelen gezginler için uzman bir Güney Kore seyahat danışmanısın. Amacın, aşağıda verilen kullanıcı tercihlerine dayanarak, son derece detaylı, mantıksal tutarlılığı olan, kişiselleştirilmiş ve profesyonel bir seyahat planı oluşturmaktır.
+    
+    ### KULLANICI TERCİHLERİ ###
+    - Seyahat Grubu: {data.get('travel_group', 'Tek Başıma')}
     - Bütçe: {budget} USD
     - Seyahat Süresi: {data.get('duration', '7')} gün
-    - Seyahat Tarzı: {data.get('travel_style', 'Moderate')}
-    - İlgi Alanları: {', '.join(data.get('interests', ['Cultural']))}
-    - Yemek Tercihleri: {data.get('food_preferences', 'Mix of Korean and international cuisine')}
-    - Konaklama Türü: {data.get('accommodation', 'Mid-range Hotels')}
     - Seyahat Mevsimi/Ayı: {data.get('season', 'Spring')}
+    - Tercih Edilen Şehirler: {data.get('cities', 'Sadece Seul')}
+    - Seyahat Tarzı: {data.get('travel_style', 'Moderate')}
+    - Seyahat Temposu: {data.get('travel_pace', 'Dengeli Keşif')}
+    - Özel İlgi Alanları: {', '.join(data.get('interests', ['Culture & History']))}
+    - Yemek Tercihleri: {data.get('food_preferences', 'Mix of Korean and international cuisine')}
+    - Konaklama Tipi: {data.get('accommodation', 'Mid-range Hotels')}
     
-    Lütfen bana Güney Kore seyahatim için günlük ayrıntılı bir gezi planı sunar mısın?
-    Aşağıdakileri içeren özel öneriler ekle:
-    1. Her gün ziyaret edilecek yerler
-    2. Yemek tercihlerime uygun restoran önerileri
-    3. Bütçeme uygun konaklama seçenekleri
-    4. Her gün için tahmini maliyetler
-    5. Konumlar arasında ulaşım ipuçları
-    6. İlgi alanlarıma göre mutlaka denenmesi gereken aktiviteler
-    7. Yerel kültür ipuçları ve görgü kuralları
-    8. Kore'de insanlarla iletişim kurma püf noktaları
-    9. Para birimi, bahşiş kültürü, alışveriş yapma ipuçları
-    10. Önemli Korece ifadeler ve turistlerin bilmesi gereken kelimeler
+    ### GÖREV ###
+    Yukarıdaki tercihleri analiz ederek, gezgin için özel bir "Güney Kore Seyahat Planı ve İtinereri" oluştur.
+    
+    ### UYULMASI GEREKEN KESİN KURALLAR ###
+    1. **Yerel Odak:** Plan içerisinde KESİNLİKLE hiçbir Türk mekanı, restoranı, kafesi veya işletmesi önerme. Odak noktası tamamen otantik Kore deneyimi olmalıdır.
+    2. **Mantıksal Akış:** Aktiviteleri coğrafi olarak mantıklı bir sıraya koy. Bir gün içinde şehrin bir ucundan diğerine anlamsız geçişler yaptırma. Örneğin, bir gün Gangnam bölgesindeki yerleri, başka bir gün Hongdae bölgesindeki yerleri gezdir.
+    3. **Kişiselleştirme:** Kullanıcının ilgi alanlarını plana somut olarak yansıt. Eğer "K-Pop" seçildiyse, plana K-Star Road veya HYBE Insight gibi yerleri ekle. Eğer "Tarih" seçildiyse Gyeongbokgung Sarayı ve Bukchon Hanok Köyü gibi yerlere öncelik ver.
+    4. **Gerçekçilik:**
+       * **Adres ve İletişim:** Konaklama yerleri ve turistik noktalar için gerçek ve tanınmış isimler kullan (Örn: "Lotte Hotel Seoul"). Ancak, AI olarak güncel adres ve telefon numarası veremeyeceğin için, bu bilgileri aşağıdaki gibi yer tutucu formatında belirt: `Adres: [Bölge Adı], Seul` ve `Telefon: [Gerçekçi Bir Formatla Yer Tutucu]`. Bu, yanlış bilgi verme riskini ortadan kaldırır.
+       * **Bütçe ve Zaman:** Önerilen aktiviteler ve restoranlar, kullanıcının belirttiği "Bütçe" ve "Seyahat Tarzı" ile uyumlu olmalı. Lüks bir bütçeye sahip kullanıcıya Michelin yıldızlı restoranlar önerirken, sırt çantalı bir gezgine yerel ve uygun fiyatlı pazarları öner. Zamanlamalar tahmini ve esnek olmalıdır.
+    
+    ### ÇIKTI FORMATI ###
+    Planı aşağıda belirtilen başlıklarla oluştur:
+    
+    # Güney Kore Seyahat Planı ve İtinereri
+    
+    ## Gezgin Profili ve Seyahat Özeti
+    * **Seyahat Tarihleri:** [Seçilen Mevsim] Ayı, [Seyahat Süresi] Gün
+    * **Seyahat Grubu:** [Seçilen Grup]
+    * **Odak:** [Seçilen Şehirler]
+    * **Tarz ve Bütçe:** [Seçilen Tarz], Yaklaşık [Seçilen Bütçe] USD
+    * **İlgi Alanları:** [Seçilen İlgi Alanları]
+    
+    ## Detaylı Günlük Plan
+    
+    ### 1. Gün: [Şehir Adı]'na Varış ve Yerleşme
+    
+    **Konaklama:** [Otel/Hostel Adı], [Konaklama Tipi]
+    **Adres:** [Bölge Adı], [Şehir Adı]
+    **İletişim:** [Gerçekçi Formatla Yer Tutucu]
+    
+    **Günün Akışı:**
+    * **15:00-16:00:** Otele yerleşme ve dinlenme.
+    * **16:00-18:00:** [Yakınlardaki bir yerin keşfi, örn: Myeongdong Alışveriş Caddesi'nde ilk tur].
+    * **18:00-19:30:** Akşam Yemeği: [Yemek Tercihine Uygun Restoran Önerisi ve Türü].
+    * **20:00-Sonrası:** [Akşam Aktivitesi, örn: N Seoul Tower'dan gece manzarası].
+    
+    **Notlar:** T-money ulaşım kartınızı havaalanından veya metro istasyonlarından temin edin.
+    
+    ### 2. Gün: [Günün Teması, örn: Tarihin İzinde]
+    
+    (Diğer günler için de benzer detaylı format)
+    
+    ## Seyahat İpuçları
+    
+    1. **Ulaşım:** [Kore'de ulaşım hakkında ipuçları]
+    2. **Para Birimi ve Ödemeler:** [Para birimi, kredi kartı kullanımı, ATM'ler hakkında bilgi]
+    3. **İletişim:** [Wi-Fi, SIM kart ve internet erişimi hakkında bilgi]
+    4. **Yerel Görgü Kuralları:** [Kore kültürüne özgü görgü kuralları]
+    5. **Temel Korece İfadeler:** [Turistlerin bilmesi gereken temel ifadeler]
+    
+    ## Tahmini Bütçe Dökümü
+    
+    * **Konaklama:** [Toplam tahmini konaklama maliyeti]
+    * **Yemek:** [Toplam tahmini yemek maliyeti]
+    * **Ulaşım:** [Toplam tahmini ulaşım maliyeti]
+    * **Aktiviteler ve Girişler:** [Toplam tahmini aktivite maliyeti]
+    * **Alışveriş ve Ekstralar:** [Tahmini ekstra harcamalar]
+    * **Toplam:** [Toplam tahmini maliyet]
+    
+    "Bu seyahat planı, belirtilen tercihler doğrultusunda turistik amaçlı olarak hazırlanmıştır."
     
     Tüm cevabını Türkçe olarak ver ve her gün için adım adım bir plan hazırla.
     """
@@ -227,7 +294,9 @@ def generate_plan():
                 "budget": budget,
                 "duration": data.get('duration', '7'),
                 "style": data.get('travel_style', 'Moderate'),
-                "season": data.get('season', 'Spring')
+                "season": data.get('season', 'Spring'),
+                "travel_group": data.get('travel_group', 'Tek Başıma'),
+                "cities": data.get('cities', 'Sadece Seul')
             }
         }
         
@@ -252,7 +321,7 @@ def generate_korean_plan():
         budget = '3000'
         
     # Create a cache key from the request data
-    cache_key = f"korean_{budget}_{data.get('duration')}_{data.get('travel_style')}_{','.join(data.get('interests', []))}_{data.get('food_preferences')}_{data.get('accommodation')}_{data.get('season')}"
+    cache_key = f"korean_{budget}_{data.get('duration')}_{data.get('travel_style')}_{','.join(data.get('interests', []))}_{data.get('food_preferences')}_{data.get('accommodation')}_{data.get('season')}_{data.get('travel_group', 'Solo')}_{data.get('travel_pace', 'Balanced')}_{data.get('cities', 'Seoul')}"
     
     # Check if we have this plan cached
     if cache_key in plan_cache:
@@ -260,16 +329,23 @@ def generate_korean_plan():
 
     # Format the prompt for DeepSeek AI for Korean immigration/police format
     prompt = f"""
-    Güney Kore'ye aşağıdaki tercihlerimle bir seyahat planlıyorum:
+    ### ROL ###
+    Sen, Türkiye'den gelen gezginler için uzman bir Güney Kore seyahat danışmanısın ve hem Korece hem Türkçe biliyorsun. Amacın, aşağıda verilen kullanıcı tercihlerine dayanarak, göçmenlik bürosu veya polis tarafından incelendiğinde profesyonel ve resmi görünecek bir seyahat planı oluşturmaktır.
+    
+    ### KULLANICI TERCİHLERİ ###
+    - Seyahat Grubu: {data.get('travel_group', 'Tek Başıma')}
     - Bütçe: {budget} USD
     - Seyahat Süresi: {data.get('duration', '7')} gün
-    - Seyahat Tarzı: {data.get('travel_style', 'Moderate')}
-    - İlgi Alanları: {', '.join(data.get('interests', ['Cultural']))}
-    - Yemek Tercihleri: {data.get('food_preferences', 'Mix of Korean and international cuisine')}
-    - Konaklama Türü: {data.get('accommodation', 'Mid-range Hotels')}
     - Seyahat Mevsimi/Ayı: {data.get('season', 'Spring')}
+    - Tercih Edilen Şehirler: {data.get('cities', 'Sadece Seul')}
+    - Seyahat Tarzı: {data.get('travel_style', 'Moderate')}
+    - Seyahat Temposu: {data.get('travel_pace', 'Dengeli Keşif')}
+    - Özel İlgi Alanları: {', '.join(data.get('interests', ['Culture & History']))}
+    - Yemek Tercihleri: {data.get('food_preferences', 'Mix of Korean and international cuisine')}
+    - Konaklama Tipi: {data.get('accommodation', 'Mid-range Hotels')}
     
-    Lütfen bana Güney Kore seyahatim için resmi bir seyahat planı oluştur. Bu plan Kore göçmenlik bürosu ya da polis tarafından incelendiğinde profesyonel ve resmi görünmelidir.
+    ### GÖREV ###
+    Yukarıdaki tercihleri analiz ederek, göçmenlik bürosu ya da polis tarafından incelendiğinde profesyonel ve resmi görünecek bir "Güney Kore Seyahat Planı ve İtinereri" oluştur.
     
     Plan şunları içermelidir:
     1. Başlık olarak "Güney Kore Seyahat Planı ve İtinereri"
@@ -319,7 +395,9 @@ def generate_korean_plan():
                 "budget": budget,
                 "duration": data.get('duration', '7'),
                 "style": data.get('travel_style', 'Moderate'),
-                "season": data.get('season', 'Spring')
+                "season": data.get('season', 'Spring'),
+                "travel_group": data.get('travel_group', 'Tek Başıma'),
+                "cities": data.get('cities', 'Sadece Seul')
             }
         }
         
@@ -337,56 +415,25 @@ def format_korean_plan(plan):
         html = ['<div class="table-responsive"><table class="korean-plan-table">']
         
         for row in rows:
-            if row.strip() == '' or row.strip() == '---' or '---' in row:
-                continue
-                
             if '|' in row:
-                cells = [cell.strip() for cell in row.split('|') if cell.strip()]
-                is_header = 'Türkçe' in row or 'Korece' in row
-                
-                if is_header:
+                # Skip separator rows with dashes
+                if row.strip().startswith('|--') or row.strip().startswith('| --'):
+                    continue
+                    
+                # Process table row
+                cols = row.split('|')
+                if len(cols) > 2:  # Ensure there are at least 2 columns
                     html.append('<tr>')
-                    for cell in cells:
-                        html.append(f'<th>{cell}</th>')
+                    # Skip the first and last empty elements from split
+                    for col in cols[1:-1]:
+                        html.append(f'<td>{col.strip()}</td>')
                     html.append('</tr>')
-                else:
-                    html.append('<tr>')
-                    for cell in cells:
-                        # Clean asterisks in cells
-                        cleaned_cell = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', cell)
-                        html.append(f'<td>{cleaned_cell}</td>')
-                    html.append('</tr>')
-            else:
-                if len(html) > 0 and html[-1] == '</table></div>':
-                    # Clean asterisks in text
-                    cleaned_row = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', row)
-                    html.append(f'<p class="mb-3">{cleaned_row}</p>')
-                else:
-                    if row.strip():
-                        # Check if it's a heading (either standalone ** format or with :)
-                        if (row.strip().startswith('**') and row.strip().endswith('**')) or row.strip().endswith(':'):
-                            # Clean asterisks in headings
-                            cleaned_heading = re.sub(r'\*\*([^*]+)\*\*', r'\1', row)
-                            html.append(f'<h4 class="mt-4 mb-2">{cleaned_heading}</h4>')
-                        else:
-                            # Clean asterisks in paragraphs
-                            cleaned_row = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', row)
-                            html.append(f'<p class="mb-3">{cleaned_row}</p>')
         
-        if len(html) > 0 and html[-1] != '</table></div>':
-            html.append('</table></div>')
-        
-        # Add final disclaimer
-        if "turistik amaçlıdır" in plan:
-            disclaimer = re.search(r'(Bu seyahat planı turistik amaçlıdır.*)', plan)
-            if disclaimer:
-                html.append(f'<div class="alert alert-secondary mt-4">{disclaimer.group(1)}</div>')
-        
-        return '<div class="immigration-document">' + ''.join(html) + '</div>'
+        html.append('</table></div>')
+        return '\n'.join(html)
     else:
-        # Use the regular plan formatter if not in table format
+        # If not in table format, use regular formatting
         return format_travel_plan(plan)
 
 if __name__ == '__main__':
-    # Use production settings
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False) 
+    app.run(host='0.0.0.0') 

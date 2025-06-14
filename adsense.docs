@@ -1,0 +1,577 @@
+Google AdSense Onay Sürecinin Kapsamlı Analizi: Başvuru Redlerinin Ardındaki Nedenler ve Onay İçin Stratejik Yol Haritası
+Giriş: AdSense Onay Sürecinin Şifrelerini Çözmek
+Raporun Amacı ve Kapsamı
+Bu rapor, Google AdSense başvurusunun sürekli olarak reddedilmesi ve bu reddedilme nedenlerinin belirsizliği sorununa yönelik kapsamlı bir analiz ve çözüm rehberi sunmak amacıyla hazırlanmıştır. İnternet sitenizde reklam göstererek gelir elde etme hedefinizde karşılaştığınız "kontrolleri geçememe ve sebep hakkında bilgi alamama" durumu, birçok yayıncının ortak tecrübesidir. AdSense onay süreci, geçmişteki basit "reklam kodu ekle, onayı al" modelinden çok daha karmaşık bir yapıya evrilmiştir. Günümüzde bu süreç, bir web sitesinin bütünsel kalitesini; yani içeriğini, kullanıcı deneyimini (UX), teknik altyapısını ve en önemlisi güvenilirliğini değerlendiren çok katmanlı bir denetim mekanizmasıdır. Bu rapor, söz konusu denetimin her bir katmanını aydınlatarak belirsizliği ortadan kaldırmayı ve sitenizi AdSense onayı için optimize etmenize yönelik somut, veriye dayalı bir eylem planı sunmayı hedeflemektedir.
+
+Google'ın Bakış Açısı
+AdSense politikalarının ve katı onay standartlarının ardındaki mantığı kavramak, süreci başarıyla yönetmenin ilk adımıdır. Google'ın temel motivasyonu, reklamverenler için değerli, güvenli ve yüksek performanslı bir reklam ağı sürdürmektir. Reklamverenler, markalarının güvenli ve kaliteli içeriklerin yanında görünmesini ve yatırımlarının karşılığını almayı bekler. Bu bağlamda, her bir yayıncı sitesi, potansiyel bir "reklam alanı" olarak değerlendirilir. Google'ın denetim süreci, şu temel soruyu yanıtlamaya çalışır: "Bu site, reklamverenlerin parasını güvenle yatırmak isteyeceği kadar değerli ve güvenilir bir platform mudur?" Bu perspektif, AdSense'in neden kopya içerik, kötü kullanıcı deneyimi veya şüpheli trafik kaynakları gibi unsurlara karşı sıfır tolerans gösterdiğini açıklar. Siteniz, bu ekosistemin değerli bir parçası olabileceğini kanıtlamak zorundadır.   
+
+Artan Reddedilme Oranları ve Yükselen Standartlar
+Son yıllarda AdSense onay standartlarının önemli ölçüde sıkılaştığı gözlemlenmektedir. Birkaç yıl önce minimum eforla onay alabilen birçok site türü, bugün "düşük değerli içerik" veya diğer gerekçelerle kolayca reddedilmektedir. Google'ın yapay zeka ve makine öğrenmesi algoritmaları, bir sitenin kalitesini, özgünlüğünü ve kullanıcıya sunduğu değeri analiz etmede giderek daha sofistike hale gelmiştir. Bu durum, artık sadece birkaç makale yazıp başvurmanın yeterli olmadığı, bunun yerine proaktif, kapsamlı ve stratejik bir optimizasyonun zorunlu hale geldiği anlamına gelmektedir. Bu rapor, sizi bu yeni standartlara hazırlayacak ve AdSense'in beklentilerini karşılamanız için gereken tüm araçları sunacaktır.   
+
+Bölüm 1: AdSense Uygunluk Temelleri - Hızlı Kontrol Listesi
+AdSense başvuru süreci, birkaç aşamadan oluşan bir denetim mekanizmasıdır. İçerik kalitesi ve kullanıcı deneyimi gibi daha karmaşık değerlendirmelere geçilmeden önce, sitenizin ve sizin, pazarlığa kapalı ve genellikle otomatik sistemler tarafından kontrol edilen temel ön koşulları karşılaması gerekir. Bu temel gerekliliklerden birini bile karşılamamak, başvurunuzun anında ve genellikle genel bir gerekçeyle reddedilmesine neden olabilir. Bu bölüm, bu kritik ilk filtreyi geçmenizi sağlayacak temel kontrol noktalarını ele almaktadır.
+
+1.1. Yaş Sınırı (18+)
+Google AdSense, yasal olarak bağlayıcı bir sözleşmedir. Bu nedenle, Google Hizmet Şartları uyarınca, başvuru sahiplerinin 18 yaşından büyük olması mutlak bir zorunluluktur. Bu kural, Google'ın yasal yükümlülüklerini yerine getirmesini sağlar ve reşit olmayan bireylerle ticari bir anlaşma yapmasını önler.   
+
+Özel Durum: Eğer 18 yaşından küçükseniz, AdSense programına katılmanız yine de mümkündür. Ancak bu, bir ebeveyniniz veya yasal vasiniz aracılığıyla yapılmalıdır. Ebeveyniniz veya vasiniz, kendi Google Hesabını kullanarak AdSense'e başvurabilir. Başvurunun onaylanması durumunda, AdSense hesabı yasal olarak yetişkinin sorumluluğunda olacak ve tüm ödemeler bu yetişkinin adına kayıtlı hesaba yapılacaktır.   
+
+1.2. Site Sahipliği ve Kontrolü
+AdSense'e başvuru yapabilmek için, reklam göstermek istediğiniz sitenin sahibi olmanız veya içeriğini değiştirmek için tam kontrole ve yetkiye sahip olmanız gerekir. Bu gerekliliğin temel nedeni tekniktir: Google, sitenin size ait olduğunu doğrulamak ve onay sürecini başlatmak için sitenizin HTML kaynak koduna bir kod parçacığı eklemenizi ister. Bu koda erişiminiz yoksa, sahipliği doğrulayamaz ve sürece devam edemezsiniz.   
+
+Alt Alan Adları (Subdomains) ve Barındırılan Platformlar: kullaniciadi.wordpress.com veya blogum.blogspot.com gibi ücretsiz barındırma hizmetleri tarafından sağlanan alt alan adları ile yapılan başvurular genellikle kabul edilmez. Google, www.alanadiniz.com gibi size ait bir üst düzey alan adı (top-level domain) üzerinde tam kontrol sahibi olmanızı bekler. Blogger veya YouTube gibi "barındırıcı iş ortakları" (host partners) ise bir istisnadır. Bu platformlar üzerinden para kazanmak istiyorsanız, AdSense başvurusunu doğrudan Blogger veya YouTube Studio arayüzü üzerinden yapmanız gerekir. Bu platformların AdSense ile özel bir entegrasyonu vardır ve farklı bir onay sürecini takip ederler.   
+
+1.3. Desteklenen Dil
+Web sitenizin birincil içeriğinin, Google AdSense tarafından desteklenen dillerden birinde olması zorunludur. İçeriğinizin büyük bir kısmı desteklenmeyen bir dildeyse, başvurunuz "desteklenmeyen dil" politikası ihlali nedeniyle doğrudan reddedilecektir. Türkçe, AdSense tarafından tam olarak desteklenen diller arasında yer almaktadır.   
+
+Ancak sadece desteklenen bir dili kullanmak yeterli değildir. Dil kalitesi de kritik bir faktördür. İçeriğinizin dilbilgisi kurallarına uygun, yazım hatalarından arındırılmış, akıcı ve anlaşılır olması beklenir. Kötü çeviriler veya anlamsız cümlelerle dolu bir metin, düşük kalite sinyali olarak algılanır ve onay şansınızı ciddi şekilde düşürür.   
+
+1.4. Yinelenen Hesap Politikası
+AdSense program politikaları, her yayıncının yalnızca bir adet AdSense hesabına sahip olmasına izin verir. Birden fazla hesap oluşturmak kesinlikle yasaktır. Başvurunuz, mevcut veya daha önce sahip olduğunuz ve kapattığınızı düşündüğünüz bir hesapla ilişkilendirilirse, "yinelenen hesap" nedeniyle reddedilir. Bu durumda, diğer tüm AdSense hesaplarınızı bulup kapatmanız ve ardından ana hesabınız üzerinden başvuruyu yeniden yapmanız veya sitenizi mevcut aktif hesaba eklemeniz gerekir. Bu durum, aynı ödeme alıcısı adı, adresi veya telefon numarası gibi bilgilerin farklı hesaplarda tespit edilmesiyle ortaya çıkabilir.   
+
+Bu dört temel gereklilik, AdSense'in ilk savunma hattını oluşturur. Bunlar, Google'ın başvuru havuzunu verimli bir şekilde filtrelemek için kullandığı, tamamen otomatikleştirilmiş ve pazarlığa kapalı kontrollerdir. Yaş, hesap verilerinden; site sahipliği, kod yerleşiminden; dil, tarayıcı analizinden ve yinelenen hesaplar, veritabanı sorgularından anında doğrulanabilir. Bu nedenle, bu aşamada bir başarısızlık, başvurunun insan incelemesine gerek kalmadan otomatik olarak elenmesine yol açar. Aldığınız "politika ihlali" gibi genel bir ret e-postası, aslında bu temel ve makine tarafından kontrol edilen kriterlerden birini geçemediğiniz anlamına gelebilir. Sistem, bu ilk kapıyı geçemeyen bir başvuru için daha derinlemesine bir içerik analizi yapmaya ilerlemeyebilir. Bu durum, AdSense onay sürecinin sıralı bir ilerleyişe sahip olduğunu gösterir. E-E-A-T gibi karmaşık içerik stratejilerini düşünmeden önce, bir yayıncının bu temel, makine tarafından kontrol edilen kurallara %100 uyumlu olduğundan emin olması gerekir.
+
+Aşağıdaki tablo, bu temel uygunluk koşullarını hızlıca gözden geçirmeniz ve sitenizin durumunu değerlendirmeniz için bir kontrol listesi sunmaktadır.
+
+Gereklilik
+
+Açıklama
+
+Politika Referansı
+
+Kendi Sitemde Durum (Kontrol Edilecek)
+
+Yaş Sınırı
+
+Başvuru sahibi 18 yaşından büyük olmalıdır.
+
+   
+
+☐ Karşılıyorum / ☐ Karşılamıyorum
+
+Site Sahipliği ve Alan Adı
+
+Site size ait olmalı, HTML koduna erişiminiz olmalı ve bir üst düzey alan adı (örn: siteadi.com) kullanmalısınız.
+
+   
+
+☐ Karşılıyorum / ☐ Karşılamıyorum
+
+Desteklenen Dil
+
+Sitenin ana içeriği Türkçe gibi desteklenen bir dilde olmalı ve dil kalitesi yüksek olmalıdır.
+
+   
+
+☐ Karşılıyorum / ☐ Karşılamıyorum
+
+Yinelenen Hesap Yok
+
+Adınıza kayıtlı yalnızca bir AdSense hesabınız olmalıdır.
+
+   
+
+☐ Karşılıyorum / ☐ Karşılamıyorum
+
+Bölüm 2: "Değersiz İçerik" Reddi - Google'ın Gözünden Kaliteyi Anlamak
+AdSense başvurularında en sık karşılaşılan ve yayıncıları en çok hayal kırıklığına uğratan ret gerekçesi, "yetersiz içerik" veya "düşük değerli içerik" (low-value content) olarak belirtilen muğlak ifadedir. Bu ifade, sitenizin Google'ın kalite standartlarını karşılamadığının bir göstergesidir. Google artık sadece kelime sayısı fazla olan siteler değil, kullanıcılara gerçek bir değer sunan, bir konuda uzmanlık sergileyen ve güvenilirlik oluşturan platformlar aramaktadır. Bu bölüm, "değer" kavramının Google için ne anlama geldiğini derinlemesine inceleyecek ve sitenizi bu beklentilere göre nasıl yapılandıracağınızı açıklayacaktır.   
+
+2.1. İçerik Niceliği ve Niteliği: Sayıların ve Kalitenin Dansı
+Google'ın gözünde bir sitenin "yeterli" sayılması için hem içerik miktarının (nicelik) hem de kalitesinin (nitelik) belirli bir seviyede olması gerekir.
+
+Yeterli İçerik Miktarı: Google, resmi olarak bir minimum sayfa veya makale sayısı belirtmese de, sektördeki uzmanların ve başarılı yayıncıların deneyimlerine dayanan genel bir kanı mevcuttur. Başvuru yapmadan önce sitenizde, her biri iyi geliştirilmiş ve kapsamlı en az 20 ila 40 makale bulunması şiddetle tavsiye edilir. Bu, sitenizin "yapım aşamasında" (under construction) veya bir şablondan ibaret olmadığını, aktif ve yaşayan bir proje olduğunu gösterir. Sadece birkaç sayfa veya boş test sayfalarıyla yapılan başvurular neredeyse her zaman reddedilir.   
+
+İçerik Derinliği ve Kelime Sayısı: Makale sayısı tek başına yeterli değildir; her bir içeriğin derinliği de kritik öneme sahiptir. Yüzeysel, birkaç paragraflık yazılar yerine, bir konuyu etraflıca ele alan, okuyucunun sorularına yanıt veren ve onlara yeni bir bakış açısı sunan içerikler oluşturulmalıdır. Genel bir kılavuz olarak, her makalenin en az 700-1000 kelime uzunluğunda olması hedeflenmelidir. Bu, konuyu derinlemesine işlemek için yeterli alan sağlar.   
+
+Yüksek Kaliteli İçerik: Kalite, belki de en önemli unsurdur. Yüksek kaliteli içerik şu özellikleri taşır:
+
+Özgünlük: İçerik %100 orijinal olmalıdır. Başka sitelerden kopyalanan, otomatik araçlarla yeniden yazılan (spun) veya anlamlı bir değer katmadan yapay zeka tarafından üretilen metinler, AdSense tarafından kolayca tespit edilir ve kesin bir ret nedenidir.   
+
+Değer Katma: İçeriğiniz, okuyucunun bir sorununu çözmeli, bir sorusunu yanıtlamalı veya onlara yeni ve faydalı bir bilgi sunmalıdır. Zaten internette yüzlerce kez yazılmış bir konuyu, farklı ve özgün bir bakış açısı katmadan tekrar etmek, "düşük değerli" olarak kabul edilir.   
+
+Okunabilirlik ve Dilbilgisi: Metin, dilbilgisi ve yazım hatalarından arındırılmış olmalıdır. Paragraflar, başlıklar ve listeler kullanılarak iyi yapılandırılmış, okunması kolay bir formatta sunulmalıdır.   
+
+2.2. E-E-A-T Prensibi: Uzmanlık, Deneyim, Yetkinlik ve Güvenilirlik Oluşturma
+AdSense onay süreci, artık modern ve yüksek kaliteli SEO (Arama Motoru Optimizasyonu) prensipleriyle temelden birleşmiş durumdadır. Google'ın arama sonuçlarında bir siteyi üst sıralara taşıyan faktörler olan E-E-A-T, konu otoritesi ve nitelikli içerik, artık AdSense için de birer ön koşul haline gelmiştir. Bu durumun temel nedeni, Google'ın iş modelinin reklamveren memnuniyetine dayanmasıdır. Reklamverenler, reklamlarının ilgili ve etkileşime girmeye hazır kullanıcılara gösterilmesini ister. Bu tür kullanıcıları en etkili şekilde çeken kaynak ise organik arama trafiğidir. Google'ın arama algoritmaları tarafından yüksek kaliteli olarak değerlendirilen ve iyi sıralama alan siteler, doğal olarak AdSense için de en değerli ortaklar olarak görülür. Dolayısıyla, AdSense, bir sitenin reklamverenler için değerini belirlemede bir vekil olarak arama kalitesi sinyallerini (E-E-A-T gibi) kullanır.
+
+Bu, bir yayıncının artık AdSense'i "kandırmaya" çalışamayacağı, bunun yerine Google Arama'yı "memnun etmesi" gerektiği anlamına gelir. Başarılı bir AdSense hesabına giden yol, doğrudan başarılı bir SEO stratejisinden geçer. E-E-A-T'si zayıf bir site iyi sıralama alamaz, organik trafik çekmekte zorlanır ve bu nedenle AdSense ekibi tarafından "düşük değerli" olarak görülerek reddedilir. Dolayısıyla, AdSense onayı için sitenizi düzeltme çabası, aslında sitenizin organik trafik potansiyelini ve genel başarısını artırmaya yönelik değerli bir iş geliştirme faaliyetine dönüşür.   
+
+E-E-A-T Nedir? Google'ın Arama Kalitesi Değerlendirici Yönergeleri'nden  türeyen E-E-A-T;    
+
+Experience (Deneyim), Expertise (Uzmanlık), Authoritativeness (Yetkinlik) ve Trustworthiness (Güvenilirlik) kelimelerinin baş harflerinden oluşur. Bu, sitenizin ve yazarlarınızın ele aldıkları konuda ne kadar bilgili, deneyimli, saygın ve güvenilir olduğunun bir ölçüsüdür ve AdSense onayı için giderek daha kritik hale gelmektedir.   
+
+Deneyim (Experience): Özellikle bir ürün incelemesi, bir seyahat rehberi veya bir nasıl yapılır kılavuzu gibi konularda, içeriği oluşturan kişinin konuyu bizzat deneyimlediğini gösteren kanıtlar sunmak. Bu, kişisel fotoğraflar, videolar veya yaşanmış anekdotlar olabilir.   
+
+Uzmanlık (Expertise): Yazarlarınızın kim olduğunu açıkça belirtin. Her makalenin altında, yazarın konuyla ilgili niteliklerini, eğitimini, aldığı sertifikaları veya mesleki geçmişini özetleyen kısa bir yazar biyografisi (author bio) ekleyin. Bu, içeriğin bir uzman tarafından kaleme alındığına dair güçlü bir sinyaldir.   
+
+Yetkinlik (Authoritativeness): Sitenizin kendi nişinde ne kadar saygın olduğudur. Bu, sektörünüzdeki diğer güvenilir ve otoriter web sitelerinden sitenize verilen bağlantılar (backlinkler) ile ölçülür. Ayrıca, yazarınızın sektörde tanınan bir isim olması veya sitenizin sosyal medyada ve forumlarda olumlu bir şekilde anılması da yetkinliği artırır.   
+
+Güvenilirlik (Trustworthiness): Bu, E-E-A-T'nin temelidir. Sitenizin güvenli bir bağlantı (HTTPS) kullanması, iletişim bilgilerinin ve gizlilik politikasının kolayca erişilebilir olması, içeriğin doğru, tarafsız ve düzenli olarak güncellenmesi gibi faktörler güvenilirliği pekiştirir.   
+
+2.3. YMYL Konuları: "Paranız veya Hayatınız" İçin Yüksek Standartlar
+YMYL Nedir? Google, bazı konuları "Your Money or Your Life" (Paranız veya Hayatınız) olarak sınıflandırır. Bu kategoriler, insanların sağlığını, finansal istikrarını, güvenliğini veya mutluluğunu doğrudan etkileyebilecek konuları içerir. Finansal tavsiyeler, tıbbi bilgiler, yasal danışmanlık ve önemli güncel olaylar bu kapsama girer.   
+
+YMYL ve AdSense: Eğer siteniz finans, yatırım, sağlık, beslenme veya hukuk gibi bir YMYL nişinde faaliyet gösteriyorsa, Google'ın incelemesi çok daha katı olacaktır. Bu tür sitelerde sunulan yanlış veya yanıltıcı bilgiler ciddi zararlara yol açabileceğinden, Google bu sitelerin olağanüstü yüksek E-E-A-T standartlarını karşılamasını bekler. Siteniz, konusunda tanınmış bir uzman veya köklü bir kurum tarafından yönetilmiyorsa, "düşük değerli içerik" gerekçesiyle reddedilme olasılığınız çok yüksektir. Google, bu tür konularda içeriğinizi, örneğin bir bankanın, bir devlet kurumunun veya saygın bir tıp dergisinin içeriğiyle aynı kalite standardında değerlendirecektir.   
+
+2.4. Konu Otoritesi ve İçerik Kümeleri: Uzmanlığınızı Stratejik Olarak Gösterme
+Google'a uzmanlığınızı kanıtlamanın en etkili yollarından biri, dağınık konular hakkında yazmak yerine belirli bir alanda derinleşmektir. Bu, konu otoritesi (topical authority) oluşturma stratejisiyle mümkündür.
+
+Konu Otoritesi: Bu strateji, tekil anahtar kelimelere odaklanmak yerine, bir nişin tamamını veya önemli bir bölümünü kapsamlı bir şekilde ele alarak o konuda bir otorite haline gelmeyi hedefler. Google, bir konuyla ilgili birçok soruyu yanıtlayan ve konunun farklı yönlerini ele alan bir siteyi, o konuda güvenilir bir kaynak olarak görür.   
+
+İçerik Kümeleri (Content Clusters): Konu otoritesi oluşturmanın pratik yolu, içerik kümesi modelini uygulamaktır. Bu model şu şekilde çalışır:   
+
+Direk Sayfa (Pillar Page): Ana konunuzu (örneğin, "Dijital Pazarlama") geniş bir şekilde ele alan, uzun ve kapsamlı bir ana sayfa oluşturursunuz. Bu sayfa, konunun genel bir özetini sunar.
+
+Küme Sayfaları (Cluster Pages): Ana konunun daha spesifik alt başlıklarını (örneğin, "SEO Temelleri", "İçerik Pazarlaması", "Sosyal Medya Reklamcılığı") ele alan daha kısa ve odaklanmış makaleler yazarsınız.
+
+İç Bağlantı (Internal Linking): Her bir küme sayfası, ilgili olduğu direk sayfaya bir bağlantı verir. Aynı şekilde, direk sayfa da tüm ilgili küme sayfalarına bağlantılar içerir.
+
+Bu yapı, Google'a sitenizin belirli bir konuda ne kadar organize ve derinlemesine bilgi sunduğunu net bir şekilde gösterir. Ayrıca, kullanıcıların konuyla ilgili aradıkları tüm bilgilere sitenizden ayrılmadan ulaşmalarını sağlayarak kullanıcı deneyimini iyileştirir.
+
+Bölüm 3: Program Politikası İhlalleri - Kırmızı Çizgileri Aşmamak
+AdSense programının sürdürülebilirliği, hem reklamverenlerin hem de kullanıcıların güvendiği temiz bir ekosisteme bağlıdır. Bu nedenle Google, belirli içerik türlerini ve yayıncı davranışlarını kesin olarak yasaklar. Bu kurallar yoruma açık değildir ve ihlali, başvurunun anında reddedilmesine veya mevcut bir hesabın uyarısız bir şekilde askıya alınmasına ya da kapatılmasına yol açabilir. Bu bölüm, kaçınılması gereken kırmızı çizgileri net bir şekilde ortaya koymaktadır.
+
+3.1. Kesinlikle Yasaklanmış İçerik Kategorileri (Google Publisher Policies)
+Aşağıdaki içerik türlerini barındıran sitelerin AdSense programına kabul edilmesi mümkün değildir. Bu içerikler, Google'ın reklam ağı için temel bir risk oluşturur ve hiçbir koşulda tolere edilmez.   
+
+Yasa Dışı Faaliyetler ve Fikri Mülkiyet İhlali: Yasa dışı eylemleri teşvik eden, telif hakkıyla korunan materyalleri (filmler, müzikler, yazılımlar) izinsiz paylaşan veya taklit (counterfeit) ürünlerin satışını yapan siteler.   
+
+Tehlikeli veya Aşağılayıcı İçerik: Irk, din, cinsel yönelim veya diğer kimlik özelliklerine dayalı nefret söylemi yayan, bireyleri veya grupları taciz eden, tehdit eden veya şiddeti teşvik eden her türlü içerik.   
+
+Gerçeğe Aykırı ve Yanıltıcı İçerik: Kullanıcıları aldatmaya yönelik tasarlanmış, kimlik avı (phishing) yapan, komplo teorileri yayan veya "kısa yoldan zengin olma" gibi asılsız vaatlerde bulunan içerikler.   
+
+Müstehcen ve Cinsel İçerik: Pornografi, cinsel içerikli görseller veya metinler, cinsel hizmetlerin (eskort, fuhuş) tanıtımı veya reşit olmayanları hedef alan yetişkin temaları içeren siteler kesinlikle yasaktır.   
+
+3.2. Kısıtlanmış İçerik Kategorileri (Google Publisher Restrictions)
+Bu kategorideki içerikler, yukarıdakiler gibi kesin olarak yasaklanmamıştır ve bu tür içeriğe sahip bir sitenin AdSense onayı alması teorik olarak mümkündür. Ancak, bu içerikler "hassas" olarak kabul edildiğinden, birçok reklamveren bu tür sayfalarda reklamlarının görünmesini engeller. Sonuç olarak, bu sayfalardaki reklam gösterimi (reklam doluluk oranı) ve dolayısıyla gelir potansiyeli çok daha düşük olacaktır.
+
+Şok Edici İçerik: Kan, vahşet, iğrenç görüntüler veya aşırı küfür içeren içerikler.   
+
+Silahlar, Patlayıcılar, Tütün ve Uyuşturucu Maddeler: Ateşli silahların, mühimmatın, patlayıcıların, tütün ürünlerinin (e-sigaralar dahil) ve yasa dışı uyuşturucuların tanıtımını veya satışını yapan içerikler.   
+
+Alkol: Alkol satışını kolaylaştıran veya sorumsuz alkol tüketimini teşvik eden içerikler.   
+
+Çevrimiçi Kumar: Gerçek parayla oynanan kumar sitelerinin tanıtımı. Türkiye, bu kısıtlamanın geçerli olduğu ülkelerden biridir, ancak yine de reklamveren havuzu sınırlıdır.   
+
+Reçeteli İlaçlar ve Onaylanmamış Takviyeler: Reçeteli ilaçların çevrimiçi satışını teşvik eden veya sağlık açısından tehlikeli olabilecek, onaylanmamış takviyeleri tanıtan içerikler.   
+
+Bu noktada, Google Yayıncı Politikaları (yasaklanmış içerik) ve Google Yayıncı Kısıtlamaları (kısıtlanmış içerik) arasındaki ayrımı anlamak, gelir beklentilerini doğru yönetmek açısından hayati önem taşır. Politikaları ihlal eden bir site doğrudan reddedilir veya yasaklanır. Kısıtlamalara tabi bir içeriğe sahip site ise onay alabilir, ancak sonrasında "Neden hiç para kazanamıyorum?" sorusuyla karşı karşıya kalabilir. Bunun nedeni, Google Ads gibi büyük reklamverenler başta olmak üzere birçok markanın, bu hassas kategorilerdeki envanterlere teklif vermeyi tercih etmemesidir. Bu bir hata değil, sistemin bir özelliğidir. Dolayısıyla, sitenizin nişini değerlendirirken sadece bariz yasakları değil, aynı zamanda bu "kısıtlanmış" listeyi de göz önünde bulundurmalı ve gelir potansiyelinizin bu durumdan nasıl etkileneceğini hesaba katmalısınız.
+
+3.3. Geçersiz Tıklamalar ve Trafik Manipülasyonu
+AdSense'in en hassas olduğu konulardan biri, reklam etkileşimlerinin doğallığıdır. Reklam gelirleri, gerçek kullanıcıların samimi ilgisine dayanmalıdır. Bu kuralı ihlal eden her türlü davranış, hesabın askıya alınması için yeterli bir sebeptir.
+
+Yasaklanmış Davranışlar:
+
+Kendi Reklamlarına Tıklamak: Ne sebeple olursa olsun, kendi sitenizdeki reklamlara tıklamak kesinlikle yasaktır.   
+
+Tıklamaya Teşvik Etmek: Ziyaretçileri doğrudan veya dolaylı olarak reklamlara tıklamaya teşvik eden ifadeler kullanmak ("Bize destek olmak için reklamlara tıklayın", "Bu bağlantıları ziyaret edin" vb.) yasaktır. Oklar veya diğer grafik hileleriyle reklamları işaret etmek de bu kapsama girer.   
+
+Yapay Tıklama ve Gösterim: Botlar, tıklama çiftlikleri veya herhangi bir otomatik araç kullanarak yapay olarak tıklama veya gösterim sayısı oluşturmak, en ciddi ihlallerden biridir.   
+
+Aşağıdaki tablo, sitenizin içeriğini bu politikalar çerçevesinde değerlendirmenize yardımcı olmak için hazırlanmıştır.
+
+Kategori
+
+Durum
+
+Açıklama ve Örnekler
+
+Politika Referansı
+
+Fikri Mülkiyet İhlali
+
+Yasaklanmış
+
+Telifli film/müzik indirme bağlantıları, sahte marka ürünlerin satışı.
+
+   
+
+Nefret Söylemi
+
+Yasaklanmış
+
+Belirli bir gruba karşı şiddeti veya ayrımcılığı teşvik eden içerikler.
+
+   
+
+Müstehcen İçerik
+
+Yasaklanmış
+
+Pornografik görüntüler, cinsel hizmetlerin tanıtımı.
+
+   
+
+Silah Satışı
+
+Kısıtlanmış
+
+Ateşli silahların, bıçakların veya mühimmatın tanıtımı veya satışı.
+
+   
+
+Tütün Ürünleri
+
+Kısıtlanmış
+
+Sigara, e-sigara ve diğer tütün ürünlerinin tanıtımı.
+
+   
+
+Çevrimiçi Kumar
+
+Kısıtlanmış
+
+Online casino, bahis sitelerinin tanıtımı (Türkiye dahil belirli ülkelerde kısıtlıdır).
+
+   
+
+Geçersiz Tıklama
+
+Yasaklanmış
+
+Kendi reklamlarına tıklama, tıklamaya teşvik etme, bot trafiği kullanma.
+
+   
+
+Bölüm 4: Web Sitesi Mimarisi ve Kullanıcı Deneyimi (UX) Optimizasyonu
+Google, bir web sitesini değerlendirirken sadece "ne söylediğine" değil, aynı zamanda "nasıl yapılandırıldığına" ve ziyaretçilere "nasıl bir deneyim sunduğuna" da büyük önem verir. Kötü tasarlanmış, yavaş ve gezinmesi zor bir site, içeriği ne kadar kaliteli olursa olsun, Google tarafından "düşük kaliteli" olarak damgalanabilir. Bunun nedeni basittir: Kötü bir kullanıcı deneyimi (UX), ziyaretçilerin siteden hızla ayrılmasına neden olur ve bu da reklamverenler için değersiz bir ortam yaratır. Dolayısıyla, sitenizin mimarisi ve UX performansı, AdSense onay sürecinin temel bir parçasıdır.
+
+4.1. Kusursuz Gezinme: Kullanıcıların ve Google Botlarının Yolunu Açmak
+Bir sitenin gezinme yapısı, hem kullanıcıların aradıkları bilgiye kolayca ulaşmasını hem de Google'ın tarama botlarının sitenin tüm içeriğini verimli bir şekilde dizine eklemesini sağlamalıdır.
+
+Net ve Mantıksal Navigasyon: Sitenizde, kullanıcıları ana sayfalara ve kategorilere yönlendiren, anlaşılır ve mantıksal bir menü yapısı bulunmalıdır. Kategoriler iyi organize edilmeli ve kullanıcılar birkaç tıklamayla aradıkları içeriğe ulaşabilmelidir. Karmaşık, kafa karıştırıcı veya "yanıltıcı gezinme" (örneğin, menü gibi görünen reklamlar), AdSense tarafından bir politika ihlali olarak kabul edilebilir ve reddedilme nedenidir.   
+
+Kaçınılması Gereken Gezinme Sorunları:
+
+Bozuk Bağlantılar (404 Hataları): Sitenizdeki iç veya dış bağlantıların kullanıcıları var olmayan sayfalara (404 hatası) yönlendirmesi, sitenin bakımsız olduğunun bir işaretidir ve kötü bir kullanıcı deneyimi yaratır.   
+
+Aşırı Pop-up'lar ve Yönlendirmeler: İçeriğe erişimi engelleyen veya kullanıcıyı isteği dışında başka sitelere yönlendiren pop-up'lar ve yönlendirmeler, gezinmeyi engellediği için kesinlikle yasaktır.   
+
+Kısıtlı Erişimli Sayfalar: Google'ın tarayıcısı, giriş (login) ekranının veya bir ödeme duvarının arkasında kalan içeriği göremez. Eğer sitenizin büyük bir kısmı bu şekilde kısıtlıysa, Google sitenizi "yetersiz içerik" olarak değerlendirebilir. Başvuru sürecinde, sitenizin taranabilir ve erişilebilir olduğundan emin olmalısınız.   
+
+4.2. Olmazsa Olmaz Sayfalar: Güven Sinyalleri Olarak Hakkımızda, İletişim ve Gizlilik Politikası
+Bu sayfalar, bir web sitesi için sadece yasal bir formalite değil, aynı zamanda Google'a ve kullanıcılara sitenizin meşruiyetini, şeffaflığını ve güvenilirliğini kanıtlayan kritik sinyallerdir. Bu, doğrudan E-E-A-T'nin "Güvenilirlik" (Trustworthiness) bileşenini destekler.   
+
+Hakkımızda (About Us): Bu sayfa, sitenizin misyonunu, vizyonunu ve arkasındaki ekibi tanıtmak için bir fırsattır. Sitenin neden var olduğunu, hangi konuda uzmanlaştığını ve içeriği kimlerin oluşturduğunu anlatarak E-E-A-T'nin "Uzmanlık" ve "Yetkinlik" boyutlarını güçlendirirsiniz.   
+
+İletişim (Contact Us): Kullanıcıların size kolayca ulaşabilmesi için açık ve işlevsel bir iletişim sayfası sunmak, şeffaflık ve güven oluşturur. Bir iletişim formu, e-posta adresi ve mümkünse bir iş adresi bu sayfada yer almalıdır.   
+
+Gizlilik Politikası (Privacy Policy): Bu sayfa, AdSense kullanmak için kesinlikle zorunludur. Google, reklam hizmetini kullanmanız karşılığında, kullanıcılarınıza veri toplama uygulamalarınız hakkında şeffaf olmanızı şart koşar. AdSense uyumlu bir gizlilik politikası en az şunları içermelidir:   
+
+Sitenizin, Google dahil olmak üzere üçüncü taraf satıcıların, reklam sunmak için çerezler (cookies) kullandığını açıkça belirtmesi.
+
+Google'ın DoubleClick çerezini kullanarak, kullanıcıların sitenize veya internetteki diğer sitelere yaptıkları ziyaretlere dayalı olarak kişiselleştirilmiş reklamlar sunduğunu açıklaması.
+
+Kullanıcılara, Reklam Ayarları sayfasını ziyaret ederek kişiselleştirilmiş reklamcılığı nasıl devre dışı bırakabilecekleri (opt-out) konusunda net talimatlar ve bir bağlantı sunması.   
+
+4.3. Teknik Performans ve Core Web Vitals: Hızın ve Kararlılığın Önemi
+Kullanıcı deneyimi sadece gezinme kolaylığı ile sınırlı değildir; sitenizin teknik performansı da aynı derecede önemlidir. Yavaş ve kararsız bir site, kullanıcıları hayal kırıklığına uğratır ve AdSense tarafından olumsuz değerlendirilir.
+
+Mobil Uyumluluk: Günümüzde web trafiğinin büyük bir kısmı mobil cihazlardan gelmektedir. Bu nedenle, sitenizin "mobil uyumlu" (mobile-friendly) olması bir seçenek değil, bir zorunluluktur. Bu, metinlerin yakınlaştırma yapmadan okunabilmesi, bağlantıların ve düğmelerin kolayca dokunulabilir olması ve sayfanın içeriği görmek için yatay olarak kaydırılmasını gerektirmemesi anlamına gelir.   
+
+Sayfa Hızı ve Core Web Vitals (CWV): Google, bir sayfanın gerçek kullanıcı deneyimini ölçmek için Core Web Vitals (Temel Web Verileri) adı verilen bir dizi metrik kullanır. Bu metrikler şunlardır:
+
+Largest Contentful Paint (LCP): Sayfanın ana içeriğinin (genellikle en büyük resim veya metin bloğu) yüklenme süresini ölçer. İyi bir LCP değeri 2.5 saniyenin altındadır.   
+
+Cumulative Layout Shift (CLS): Sayfa yüklenirken meydana gelen beklenmedik görsel düzen kaymalarını ölçer. Düşük bir CLS skoru, sayfanın görsel olarak kararlı olduğunu gösterir.   
+
+Interaction to Next Paint (INP): Kullanıcının bir etkileşimine (tıklama, dokunma) sayfanın ne kadar hızlı yanıt verdiğini ölçer.
+Yavaş yüklenen veya yüklenirken elementleri sürekli kayan bir site, kötü CWV puanları alır ve bu durum AdSense onay şansını önemli ölçüde düşürür.   
+
+Pratik Düzeltmeler: CWV sorunlarını iyileştirmek için atılabilecek bazı adımlar şunlardır:
+
+LCP'yi İyileştirmek: Sunucu yanıt süresini azaltmak (daha iyi bir hosting planına geçmek), resimleri optimize etmek (doğru format ve sıkıştırma), ve kritik kaynakları (LCP resmi gibi) önceden yüklemek (preload).   
+
+CLS'yi Azaltmak: Resim ve video etiketlerinde her zaman width ve height özniteliklerini belirterek tarayıcının ne kadar alan ayıracağını bilmesini sağlamak, reklamlar ve gömülü içerikler için sabit bir alan ayırmak ve web yazı tiplerinin (web fonts) düzen kaymasına neden olmasını önlemek için fontları önceden yüklemek.   
+
+Özetle, kötü site mimarisi ve zayıf kullanıcı deneyimi sadece küçük kusurlar değildir; Google bunları doğrudan düşük kaliteli, güvenilmez bir sitenin göstergeleri ve hatta bazı durumlarda politika ihlalleri olarak ele alır. Gezinmesi zor bir site, Google tarayıcısı için de dizine eklenmesi zor bir sitedir. Bu durum, tarayıcının içeriği kaçırmasına ve site aslında dolu olmasına rağmen "yetersiz içerik" gerekçesiyle reddedilmesine yol açabilir. Bu, reddin altında yatan gerçek teknik sorunu maskeler. Bu nedenle, sitenizin tasarımına, hosting hızına ve sayfa yapısına yatırım yapmak, en az iyi içerik yazmak kadar önemlidir. Bu, içeriğinizin değerini sunacağınız temeldir.
+
+Bölüm 5: Trafik Kalitesi ve Kaynakları - Ziyaretçileriniz Kim ve Nereden Geliyor?
+AdSense için "tüm trafik eşittir" düşüncesi büyük bir yanılgıdır. Google, sitenize gelen ziyaretçilerin sayısından çok, bu ziyaretçilerin kim olduğu, nereden geldiği ve sitenizle nasıl etkileşim kurduğuyla ilgilenir. Trafik kaynaklarınız, Google'a kullanıcı niyetinin kalitesi ve potansiyel riskler hakkında güçlü ipuçları verir. Bu nedenle, trafik kalitesi, AdSense onay sürecinde ve hesabınızın sağlığını korumada kritik bir rol oynar.
+
+5.1. Organik Trafiğin Altın Değeri ve Sosyal Medya Trafiğinin Riskleri
+Google, trafik kaynaklarını kullanıcı niyetini ve riski tahmin etmek için güçlü bir vekil olarak inceler. Bir ziyaretçinin kaynağı, onun sitedeki olası davranışı ve potansiyel reklam etkileşimlerinin geçerliliği hakkında önemli ipuçları sağlar. Örneğin, "düz tabanlar için en iyi koşu ayakkabısı" gibi bir arama sorgusuyla Google'dan gelen bir kullanıcının net ve yüksek bir ticari niyeti vardır. Bu kullanıcı, bir satın alma kararı vermek için aktif olarak bilgi aramaktadır. Buna karşılık, bir Facebook mizah sayfasındaki bağlantıdan gelen bir kullanıcının niyeti belirsiz ve düşüktür; büyük olasılıkla eğlence amaçlı gezinmektedir. Yüksek niyetli kullanıcıların, sorgularıyla ilgili içerik ve reklamlarla anlamlı bir şekilde etkileşime girme olasılığı daha yüksektir, bu da reklamverenlere değer sağlar. Düşük niyetli kullanıcıların ise siteden hızla ayrılma (yüksek hemen çıkma oranı) veya yanlışlıkla reklamlara tıklama olasılığı daha yüksektir, bu da reklamverenler ve Google için bir yükümlülük olan düşük kaliteli veya geçersiz tıklamalar üretir.
+
+Bu bağlamda, bir sitenin trafik profili, AdSense için sunduğu "özgeçmişin" temel bir parçasıdır. Organik arama tarafından domine edilen sağlıklı ve çeşitli bir trafik profiline sahip bir site, istikrarlı ve yüksek değerli bir ortak gibi görünür. Tamamen sosyal medya veya ücretli kampanyalardan kaynaklanan düzensiz ani artışlara sahip bir site ise yüksek riskli, potansiyel olarak hileli bir ortak gibi görünür. Bu nedenle, sadece riskli kaynaklardan ham trafik rakamları peşinde koşmak yerine, SEO yoluyla sürdürülebilir ve yüksek kaliteli bir kitle oluşturmaya odaklanmak esastır.
+
+Organik Trafik (Arama Motorları): Google, Bing gibi arama motorlarından gelen trafik, AdSense için en değerli trafik türü olarak kabul edilir. Bunun nedeni, organik ziyaretçilerin genellikle belirli bir bilgi, ürün veya çözüm arayışında olmasıdır. Bu "yüksek kullanıcı niyeti", onların sitenizdeki içerikle ve bu içerikle alakalı reklamlarla daha fazla ilgilenme olasılığını artırır. AdSense, istikrarlı ve büyüyen bir organik trafiğe sahip siteleri, sağlıklı ve değerli platformlar olarak görme eğilimindedir.   
+
+Sosyal Medya Trafiği: Facebook, Twitter, Instagram gibi platformlardan gelen trafik, özellikle yeni siteler için hızlı bir ziyaretçi kaynağı olabilir. Ancak AdSense açısından bu trafik türü "tehlikeli" olarak kabul edilebilir. Nedenleri şunlardır:   
+
+Düşük Niyet: Sosyal medya kullanıcıları genellikle aktif olarak bir şey aramak yerine, akışlarında gezinirken dikkatlerini çeken bir bağlantıya tıklarlar. Bu, daha düşük etkileşim ve daha yüksek hemen çıkma oranları anlamına gelebilir.
+
+Ani Trafik Artışları: Viral bir paylaşım, sitenize aniden on binlerce ziyaretçi gönderebilir. Google'ın otomatik sistemleri, bu tür doğal olmayan ani artışları "geçersiz trafik" veya bot aktivitesi olarak algılayabilir ve hesabınıza reklam sunum limiti koyabilir veya hesabınızı askıya alabilir.
+
+Düşük Kaliteli Etkileşim: Sosyal medyadan gelen, özellikle mobil kullanıcılar, yanlışlıkla reklamlara tıklamaya daha meyilli olabilir. Bu durum, geçersiz tıklama oranını artırarak hesabınızı riske atar.   
+
+Yasaklanmış ve Riskli Trafik Kaynakları:
+
+Kesinlikle Yasak: "Tıklama başına öde" (paid-to-click) programları, istenmeyen toplu e-postalar (spam) veya belirli yazılım uygulamalarının eylemiyle (örneğin, istenmeyen araç çubukları) yönlendirilen trafik kesinlikle yasaktır ve hesabınızın anında kapatılmasına neden olur.   
+
+Satın Alınan Trafik: Çeşitli platformlardan trafik satın almak, genellikle düşük kaliteli ve ilgisiz ziyaretçiler getirdiği için AdSense politikalarıyla çelişir. Bu tür trafik, yüksek hemen çıkma oranlarına ve sıfır etkileşime yol açarak sitenizin "düşük değerli" olarak algılanmasına neden olur.   
+
+5.2. Google Analytics ile Geçersiz Trafiği Tespit Etme ve Önleme
+Google'ın sistemleri geçersiz trafiği tespit etmek için sürekli çalışsa da, bir yayıncı olarak kendi trafiğinizi proaktif bir şekilde izlemek ve anlamak sizin sorumluluğunuzdadır. Google Analytics, bu konuda en güçlü müttefikinizdir. Şüpheli aktiviteleri erken tespit etmek, hesabınızı korumanıza yardımcı olabilir.   
+
+İzlenmesi Gereken Metrikler ve Raporlar:
+
+Ani ve Açıklanamayan Trafik Zirveleri: Edinme > Trafik edinme raporunda, belirli bir günde veya saatte normalin çok üzerinde bir trafik artışı olup olmadığını kontrol edin. Bu artış, organik arama veya bilinen bir kampanyadan kaynaklanmıyorsa şüphelidir.   
+
+Yüksek Hemen Çıkma Oranı ve Düşük Oturum Süresi: Etkileşim > Sayfalar ve ekranlar raporunu Trafik kaynağı boyutuyla birleştirerek, belirli bir yönlendirme sitesinden (referral) veya kampanyadan gelen trafiğin hemen çıkma oranının anormal derecede yüksek (>) ve ortalama oturum süresinin birkaç saniye olup olmadığını analiz edin. Bu, bot trafiğinin tipik bir işaretidir.   
+
+Beklenmedik Coğrafi Konumlar: Demografi > Demografik ayrıntılar raporunda, hedef kitlenizin dışında kalan ülkelerden (örneğin, Çin, Rusya, Vietnam) ani ve yoğun bir trafik gelip gelmediğini kontrol edin. Bu, genellikle bot ağlarından kaynaklanan bir durumdur.   
+
+Düşük Dönüşüm Oranları: Eğer sitenizde bir bülten aboneliği veya ürün satışı gibi bir hedef varsa, trafik artarken bu hedeflerin gerçekleşme oranının sabit kalması veya düşmesi, gelen trafiğin ilgisiz veya sahte olduğunun bir göstergesi olabilir.   
+
+Önleyici Tedbirler:
+
+IP Engelleme: Google Analytics'te veya sunucu düzeyinde, sürekli olarak şüpheli davranışlar sergileyen belirli IP adreslerini veya IP aralıklarını engelleyebilirsiniz.   
+
+Yönlendirme Dışlama Listesi: Analytics raporlarınızda sürekli olarak düşük kaliteli trafik gönderen şüpheli yönlendirme sitelerini (referral spam) tespit ederseniz, bunları Yönetici > Veri Akışları > Etiketleme Ayarlarını Yapılandır > İstenmeyen yönlendirmeleri listele bölümünden dışlayabilirsiniz.   
+
+Unutmayın ki bu metrikler tek başlarına kesin bir kanıt sunmaz, ancak bir araya geldiklerinde şüpheli bir durumu işaret edebilirler ve daha derinlemesine bir araştırma yapmanızı gerektirirler.
+
+Bölüm 6: Teknik Kurulum ve Doğrulama - Kodun ve Taramaların İncelikleri
+Birçok yayıncı, AdSense onay sürecini yalnızca içerik kalitesine odaklarken, genellikle gözden kaçan ancak bir o kadar da kritik olan teknik detayları ihmal eder. Mükemmel içeriğe ve tasarıma sahip bir site bile, yanlış yerleştirilmiş bir kod parçacığı, hatalı bir sunucu yapılandırması veya Google'ın tarayıcılarını engelleyen basit bir ayar nedeniyle reddedilebilir. Bu teknik hatalar, Google'a "yetersiz içerik" veya "site kullanılamıyor" gibi yanıltıcı ve kafa karıştırıcı ret gerekçeleri sunmasına neden olabilir. Bu bölüm, başvurunuzun başarısı için hayati olan bu teknik adımları ve doğrulamaları ele almaktadır.
+
+Bu durumun temel mekanizması şudur: AdSense inceleme süreci, bir tarayıcının (crawler) web sitenizi başarıyla ziyaret etmesine ve ayrıştırmasına bağlıdır. Eğer AdSense kodu eksikse, site hesapla ilişkilendirilemez. Eğer robots.txt dosyası tarayıcıyı engelliyorsa, tarayıcı siteyi boş veya yasaklanmış olarak görür. Eğer ads.txt dosyası eksikse, site önemli bir doğrulama adımını geçemez. Kullanıcının aldığı ret e-postası, tarayıcının bakış açısından yazılmıştır. Tarayıcı engellendiyse "site kullanılamıyor" raporu verir. Siteye erişebiliyor ancak içerik sayfalarını göremiyorsa "yetersiz içerik" raporu verir. Sitesinin yayında ve içerikle dolu olduğunu bilen yayıncı, bu görünüşte yanlış ve belirsiz geri bildirim karşısında hayal kırıklığına uğrar ve asıl nedenin teknik olduğunu fark etmez. Bu nedenle, derinlemesine bir içerik incelemesinden önce bile, teknik doğrulama bir ret sorununu gidermenin ilk adımı olmalıdır. robots.txt dosyasını kontrol etmek, HTML kaynağında kod yerleşimini doğrulamak ve ads.txt dosyasının kök dizinde genel erişime açık olduğundan emin olmak, bir yayıncının sitesini Google tarayıcısının "gördüğü" gibi görmeyi öğrenmesi anlamına gelir. robots.txt dosyasındaki tek bir satırı düzeltmek, aylarca süren içerik çalışmasını boşa çıkarabilecek bir sorunu çözerek onayın anahtarı olabilir.
+
+6.1. AdSense ve ads.txt Kodlarının Doğru Entegrasyonu
+AdSense Doğrulama Kodu: AdSense hesabınızı oluşturup sitenizi eklediğinizde, Google size bir kod parçacığı (snippet) verir. Bu kod, hesabınızla siteniz arasındaki bağlantıyı kurar ve Google'ın sitenizi incelemesini sağlar. Bu kodun doğru bir şekilde yerleştirilmesi kritik öneme sahiptir:
+
+Kod, sitenizde reklam göstermek istediğiniz her sayfanın HTML kodunda, <head> ve </head> etiketleri arasına yerleştirilmelidir. Kodu sadece ana sayfaya eklemek yeterli değildir.   
+
+Eğer WordPress gibi bir içerik yönetim sistemi (CMS) kullanıyorsanız, bu kodu manuel olarak her sayfaya eklemek yerine, Google'ın resmi Site Kit eklentisini, Ad Inserter gibi popüler bir eklentiyi veya temanızın "Header/Footer Scripts" gibi bir ayarını kullanabilirsiniz. Bu araçlar, kodun tüm sitenize doğru bir şekilde enjekte edilmesini otomatikleştirir.   
+
+ads.txt Dosyası: ads.txt (Authorized Digital Sellers - Yetkili Dijital Satıcılar), reklam sahtekarlığını önlemeyi amaçlayan bir IAB Tech Lab girişimidir. Bu basit metin dosyası, sitenizde reklam satmaya yetkili olan şirketleri (AdSense dahil) listeler.   
+
+Neden Önemli?: Bir ads.txt dosyasına sahip olmak zorunlu olmasa da, şiddetle tavsiye edilir. Bu dosyanın olmaması veya hatalı olması, Google'ın sitenizdeki reklam envanterinin yetkili olup olmadığını doğrulayamamasına neden olur. Bu durum, reklam gelirlerinizde düşüşe ve onay sürecinde sorunlara yol açabilir.   
+
+Nasıl Oluşturulur ve Yüklenir?:
+
+AdSense hesabınızdan size özel ads.txt satırını kopyalayın. Bu satır şu formattadır: google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0, burada pub- ile başlayan numara sizin benzersiz yayıncı kimliğinizdir.   
+
+ads.txt adında basit bir metin dosyası oluşturun ve kopyaladığınız satırı içine yapıştırın.
+
+Bu dosyayı, sitenizin kök dizinine yükleyin. Yani, dosyaya https://www.alanadiniz.com/ads.txt adresinden erişilebilmelidir. Alt bir klasöre (örn:    
+
+/blog/ads.txt) yüklenmesi geçersizdir.
+
+Doğruluğunu kontrol etmek için tarayıcınızda https://www.alanadiniz.com/ads.txt adresini ziyaret edin. Dosyanın içeriğini görüyorsanız, doğru yüklenmiş demektir.
+
+6.2. robots.txt Dosyası: Google Tarayıcılarına Yeşil Işık Yakmak
+robots.txt, sitenizin kök dizininde bulunan ve arama motoru botlarına sitenizin hangi bölümlerini tarayıp tarayamayacaklarını bildiren bir metin dosyasıdır. Yanlış yapılandırılmış bir    
+
+robots.txt dosyası, AdSense tarayıcısının sitenize erişimini tamamen engelleyebilir.
+
+Yaygın Hata ve Sonuçları: En sık yapılan hatalardan biri, aşağıdaki gibi genel bir engelleme kuralı kullanmaktır:
+
+User-agent: *
+Disallow: /
+Bu kural, * (tüm botlar) için sitenin tamamını (/) engeller. Bu, Google'ın reklam tarayıcısı olan Mediapartners-Google ve genel arama tarayıcısı olan Googlebot'u da içerir. Bu engelleme nedeniyle tarayıcı sitenize erişemez ve içeriğinizi göremez. Sonuç olarak, AdSense başvurunuz "site kullanılamıyor" veya "yetersiz içerik" gibi yanıltıcı bir gerekçeyle reddedilir.   
+
+Nasıl Kontrol Edilir ve Düzeltilir?:
+
+Tarayıcınızda https://www.alanadiniz.com/robots.txt adresini ziyaret ederek dosyanızın içeriğini kontrol edin.
+
+User-agent: * veya User-agent: Mediapartners-Google satırlarının altında Disallow: / gibi genel bir engelleme olup olmadığını kontrol edin.
+
+Eğer böyle bir engelleme varsa, bu satırı silin veya sadece belirli dizinleri (örneğin Disallow: /admin/) engelleyecek şekilde düzenleyin.
+
+Google'ın AdSense tarayıcısının erişimine izin verildiğinden emin olmak için şu satırları ekleyebilirsiniz:
+
+User-agent: Mediapartners-Google
+Allow: /
+Yaptığınız değişiklikleri doğrulamak için Google Search Console'da bulunan "robots.txt Test Aracı"nı kullanabilirsiniz.   
+
+6.3. E-A-T için Şema (Schema) İşaretlemesi Uygulamak (İleri Düzey)
+Şema işaretlemesi (Schema Markup), arama motorlarına sitenizdeki varlıklar (kuruluşunuz, yazarlarınız, ürünleriniz vb.) hakkında yapılandırılmış, net bilgiler sunmanın bir yoludur. Bu, doğrudan AdSense onayı için bir gereklilik olmasa da, sitenizin E-E-A-T sinyallerini güçlendirerek dolaylı yoldan onay şansınızı artırabilir.   
+
+Organization Şeması ile Güvenilirlik (Trustworthiness) Artırma: Sitenizin ana sayfasına veya hakkımızda sayfasına Organization şeması ekleyerek Google'a şunları net bir şekilde bildirebilirsiniz:
+
+Kuruluşunuzun resmi adı ve logosu.
+
+Resmi web sitesi adresi.
+
+İletişim bilgileri (telefon, adres).
+
+Resmi sosyal medya profilleriniz (sameAs özelliği ile).   
+
+
+Bu, markanızın tutarlı bir dijital kimliğe sahip olduğunu ve güvenilir bir varlık olduğunu gösterir.
+
+Person Şeması ile Uzmanlık ve Yetkinlik (Expertise, Authoritativeness) Vurgulama: Yazar biyografi sayfalarınıza Person şeması ekleyerek yazarlarınızın niteliklerini yapılandırılmış veri olarak sunabilirsiniz:
+
+Yazarın adı, iş unvanı.
+
+Uzmanlık alanları (knowsAbout).
+
+Çalıştığı veya bağlı olduğu kurumlar (affiliation).
+
+Mezun olduğu okullar (alumniOf).
+
+Yazarın diğer online profilleri (sameAs özelliği ile LinkedIn, Twitter vb.).   
+
+
+Bu, içeriğinizin alanında yetkin kişiler tarafından oluşturulduğuna dair güçlü bir E-E-A-T sinyali gönderir.
+
+Bu teknik adımlar, sitenizin Google tarafından doğru bir şekilde görülmesini ve değerlendirilmesini sağlar. İçerik kalitesine harcadığınız emeğin, basit bir teknik hata yüzünden boşa gitmesini önlemek için bu kontrolleri dikkatle yapmak hayati önem taşır.
+
+Bölüm 7: Reddedilme Sonrası Eylem Planı ve Yeniden Başvuru Stratejisi
+Google AdSense'ten bir ret e-postası almak moral bozucu olabilir, özellikle de gerekçeler belirsiz olduğunda. Ancak bu durumu bir son olarak değil, sitenizi daha iyi hale getirmek için bir fırsat ve bir yol haritası olarak görmek önemlidir. Aceleyle ve hiçbir değişiklik yapmadan tekrar tekrar başvurmak, yalnızca aynı ret cevabını almanıza neden olacaktır. Başarılı bir yeniden başvuru, sorunu doğru teşhis ettiğinizi, ilgili politikaları anladığınızı ve kalıcı, kapsamlı bir çözüm uyguladığınızı gösteren stratejik bir süreçtir.
+
+Yeniden başvuru veya itiraz süreci, sadece ikinci bir şans istemek değildir; bu, ilk başarısızlığınızı ne kadar anladığınızın bir testidir. Başarılı bir itiraz, yayıncının sorunu doğru bir şekilde teşhis ettiğini, ilgili politikaları kavradığını ve kapsamlı, kalıcı bir çözüm uyguladığını gösterir. Google'ın inceleme ekibi, devasa bir başvuru hacmiyle ilgilenir. Yayıncının işini yaptığını, artık düşük riskli ve yüksek kaliteli bir ortak olduğunu açık ve öz bir şekilde gösteren bir itirazı onaylama olasılıkları daha yüksektir. "Lütfen tekrar kontrol edin" gibi genel bir itiraz, yayıncının reddedilmekten ders almadığını ve gelecekte de sorun kaynağı olabileceğini işaret eder. Dolayısıyla, itirazın kendisinin kalitesi de bir kalite sinyalidir. Belirli politika maddelerine atıfta bulunan, atılan somut adımları detaylandıran, kanıta dayalı ve iyi yapılandırılmış bir itiraz, duygusal veya genel bir yalvarıştan çok daha ikna edicidir. Bu süreci bir iş teklifi gibi ele almak gerekir. "Yenilenmiş" sitenizin artık Google'ın reklamverenleri için neden değerli bir yatırım olduğunu kanıtlayan bir vaka oluşturmalısınız. Bu, yapılan iyileştirmelerin bir "kağıt izini" (örneğin, güncellenmiş makalelerin bir listesi, teknik düzeltmelerin bir kaydı) oluşturmayı ve bunu itirazda özetlemeyi içerir.
+
+7.1. Adım Adım Kontrol ve Düzeltme Listesi
+Ret Nedenini Anlamak: AdSense'ten gelen e-postayı dikkatle okuyun. "Politika ihlali" veya "Düşük değerli içerik" gibi genel ifadeler içerse bile, bu ifadeler birer ipucudur. Bu raporun önceki bölümlerini bir kontrol listesi olarak kullanarak, bu genel ifadenin ardında yatan spesifik nedenleri (örneğin, YMYL konusunda yetersiz E-E-A-T, kötü mobil deneyim, robots.txt engeli vb.) belirlemeye çalışın.   
+
+Acele Etmemek ve Sabırlı Olmak: En büyük hatalardan biri, ret e-postasını aldıktan hemen sonra yeniden başvurmaktır. Google, sitenizde anlamlı ve kalıcı değişiklikler görmek ister. Gerekirse, yeniden başvurmadan önce birkaç hafta, hatta birkaç ay boyunca sitenizi iyileştirmeye odaklanın. Bu süre zarfında yeni, yüksek kaliteli içerikler ekleyin, mevcut içerikleri güncelleyin ve teknik sorunları giderin. Unutmayın, sitenizin yaşı da bir faktördür; bazı uzmanlar en az 3-6 aylık bir siteyle başvurmayı önermektedir.   
+
+İçerik Budaması ve Güncellemesi (Content Pruning): Sitenizin genel kalitesini artırmak için güçlü bir strateji, düşük performanslı içerikleri elden geçirmektir. Google Analytics ve Search Console verilerini kullanarak, çok az trafik alan, güncelliğini yitirmiş, kısa veya zayıf (thin content) içerikleri belirleyin. Bu içerikler için üç seçeneğiniz vardır:
+
+İyileştirme (Improve): İçeriği yeni bilgilerle güncelleyin, daha kapsamlı hale getirin, uzman görüşleri veya yeni görseller ekleyin.
+
+Birleştirme (Consolidate): Benzer konuları ele alan birkaç zayıf makaleyi, tek bir kapsamlı ve güçlü makalede birleştirin. Eski URL'lerden yenisine 301 yönlendirmesi yapmayı unutmayın.
+
+Silme (Remove): Eğer içerik tamamen alakasız, güncellenemeyecek kadar eski veya değersiz ise, son çare olarak silin. Bu, Google'ın sitenizi tararken sadece en kaliteli sayfalarınıza odaklanmasını sağlar.   
+
+7.2. Başarılı Bir Yeniden Değerlendirme Talebi Hazırlama
+Sitenizde gerekli tüm iyileştirmeleri yaptıktan sonra, yeniden başvuru veya itiraz (appeal) formunu doldurma zamanı gelmiştir. Bu formu doldururken aşağıdaki noktalara dikkat edin:
+
+Kanıt ve Dokümantasyon: Sadece "sorunları düzelttim" demek yerine, yaptığınız değişiklikleri somut ve kanıta dayalı bir şekilde listeleyin. Örneğin:
+
+"AdSense program politikalarını detaylıca inceledim ve 'Yasaklanmış İçerik' bölümü uyarınca X ve Y konularındaki makaleleri sitemden kaldırdım."
+
+"Sitemdeki 15 adet eski makaleyi, güncel veriler ve uzman görüşleri ekleyerek güncelledim ve kelime sayılarını ortalama 1200'e çıkardım."
+
+"robots.txt dosyamdaki genel engelleme kuralını kaldırarak Google tarayıcılarının siteme tam erişimini sağladım."
+
+"Kullanıcı deneyimini iyileştirmek amacıyla sitemin mobil uyumluluğunu test ettim ve CLS skorunu 0.25'ten 0.05'e düşürdüm.".   
+
+Dürüstlük ve Sorumluluk: Eğer farkında olmadan bir politika ihlali yaptıysanız, bunu dürüstçe kabul edin. Hatayı anladığınızı ve gelecekte benzer bir durumun yaşanmaması için hangi önlemleri aldığınızı (örneğin, içerik yayınlama öncesi kontrol listesi oluşturmak gibi) açıklayın. Bu, iyi niyetinizi ve programı ciddiye aldığınızı gösterir.   
+
+Vaka Analizlerinden Ders Çıkarma: Çevrimiçi forumlarda ve topluluklarda, reddedildikten sonra onay alan yayıncıların deneyimlerini inceleyin. Genellikle başarılı hikayeler, sabırlı bir şekilde sitelerini baştan aşağı elden geçiren, özellikle içerik kalitesini, site yapısını ve temel sayfaları (Hakkımızda, İletişim, Gizlilik Politikası) iyileştiren yayıncılara aittir.   
+
+Aşağıdaki kapsamlı denetim listesi, yeniden başvurmadan önce sitenizin her yönünü gözden geçirmenize yardımcı olacaktır. Bu listeyi, yaptığınız değişiklikleri belgelemek ve itiraz metninizi hazırlamak için bir temel olarak kullanabilirsiniz.
+
+Bölüm
+
+Kontrol Maddesi
+
+Durum (Tamamlandı/İyileştiriliyor)
+
+Notlar / Yapılan Değişiklikler
+
+Temel Uygunluk
+
+18+ yaş, site sahipliği, desteklenen dil, tek hesap kuralları kontrol edildi mi?
+
+☐
+
+Tüm temel koşullar sağlanıyor.
+
+İçerik Kalitesi ve E-E-A-T
+
+Sitede en az 20-40 adet, 700+ kelimelik, özgün ve değerli makale var mı?
+
+☐
+
+10 yeni makale eklendi, 15 makale güncellendi.
+
+Tüm makalelerde yazar biyografileri var mı?
+
+☐
+
+Tüm yazarlar için uzmanlıklarını belirten bio'lar eklendi.
+
+YMYL konuları işleniyorsa, uzmanlık ve kaynaklar net bir şekilde belirtildi mi?
+
+☐
+
+Finansal tavsiye içeren makaleler kaldırıldı.
+
+Konu otoritesi oluşturmak için içerik kümesi stratejisi uygulanıyor mu?
+
+☐
+
+"SEO" ana konusu için direk sayfa ve 5 küme sayfası oluşturuldu.
+
+Politika İhlalleri
+
+Sitede yasaklanmış veya kısıtlanmış içerik (silah, kumar, yetişkin vb.) var mı?
+
+☐
+
+Kısıtlanmış kategorideki 3 makale kaldırıldı.
+
+UX ve Site Mimarisi
+
+Navigasyon menüsü net ve anlaşılır mı? Bozuk bağlantı var mı?
+
+☐
+
+Menü yapısı basitleştirildi, tüm bozuk linkler düzeltildi.
+
+Hakkımızda, İletişim ve AdSense uyumlu Gizlilik Politikası sayfaları mevcut ve erişilebilir mi?
+
+☐
+
+Gizlilik Politikası, çerez ve opt-out bilgileriyle güncellendi.
+
+Site mobil uyumlu mu? Core Web Vitals (LCP, CLS) puanları iyi durumda mı?
+
+☐
+
+Mobil tema optimize edildi, CLS sorunu giderildi.
+
+Trafik Kalitesi
+
+Trafiğin önemli bir kısmı organik arama kaynaklı mı? Şüpheli trafik kaynakları var mı?
+
+☐
+
+Sosyal medya trafiği azaltıldı, SEO çalışmalarına ağırlık verildi.
+
+Teknik Kurulum
+
+AdSense kodu tüm sayfalarda <head> etiketleri arasında doğru bir şekilde yer alıyor mu?
+
+☐
+
+Site Kit eklentisi ile kodun doğru yerleşimi sağlandı.
+
+ads.txt dosyası doğru formatta oluşturulup kök dizine yüklendi mi?
+
+☐
+
+ads.txt dosyası oluşturuldu ve doğrulandı.
+
+robots.txt dosyası Google tarayıcılarını engelliyor mu?
+
+☐
+
+robots.txt kontrol edildi, herhangi bir engelleyici kural bulunmuyor.
+
+
+E-Tablolar'a aktar
+Sonuç: Sürdürülebilir AdSense Başarısına Giden Yol
+Bu rapor boyunca detaylandırıldığı üzere, Google AdSense onayı almak, artık yalnızca teknik bir kod entegrasyonu işlemi değil, bir web sitesinin bütünsel kalitesinin, güvenilirliğinin ve kullanıcıya sunduğu değerin kapsamlı bir şekilde değerlendirildiği sofistike bir süreçtir. Başvurunuzun sürekli reddedilmesi, Google'ın sitenizi bu temel kriterlerden bir veya birkaçında yetersiz bulduğunun açık bir göstergesidir.
+
+Analizin ana bulguları, başarılı bir AdSense stratejisinin şu temel direkler üzerine inşa edilmesi gerektiğini ortaya koymaktadır:
+
+Kalite Odaklılık: Google, reklamverenlerinin markalarını ilişkilendirmek isteyeceği, yüksek kaliteli, özgün ve değerli içerik sunan siteler arar. Kopya, zayıf veya yapay zeka tarafından üretilmiş içeriklerin bu ekosistemde yeri yoktur.
+
+E-E-A-T'nin Yükselişi: Uzmanlık, Deneyim, Yetkinlik ve Güvenilirlik (E-E-A-T), özellikle "Paranız veya Hayatınız" (YMYL) olarak adlandırılan hassas konularda, bir sitenin güvenilirliğinin temel ölçütü haline gelmiştir. Artık sadece ne söylediğiniz değil, kim olduğunuz ve bunu söylemeye yetkin olup olmadığınız da önemlidir.
+
+Kusursuz Kullanıcı Deneyimi: Hızlı, mobil uyumlu, gezinmesi kolay ve şeffaf (Hakkımızda, İletişim, Gizlilik Politikası gibi sayfalarla) bir site, hem kullanıcılara hem de Google'a güven verir. Kötü bir kullanıcı deneyimi, doğrudan düşük kalite sinyali olarak algılanır.
+
+Teknik Uyumluluk: Doğru yerleştirilmiş AdSense kodu, hatasız bir ads.txt dosyası ve Google tarayıcılarına engel olmayan bir robots.txt yapılandırması gibi teknik detaylar, içeriğinizin doğru bir şekilde değerlendirilebilmesi için hayati öneme sahiptir.
+
+Trafik Kalitesi: Ziyaretçilerinizin sayısı kadar, nereden geldikleri de önemlidir. Yüksek niyetli organik arama trafiği, AdSense için en değerli kaynakken; ani ve düşük etkileşimli sosyal medya veya satın alınmış trafik, riskli ve istenmeyen bir durumdur.
+
+Bu noktada, benimsenmesi gereken en önemli stratejik zihniyet değişikliği şudur: AdSense onayı bir "hedef" değil, yüksek kaliteli bir web sitesi oluşturma ve sürdürme sürecinin doğal bir "sonucudur". Amacınız, sadece AdSense'i memnun etmek için kurallara uymak olmamalıdır. Asıl amaç, kullanıcılar için gerçekten değerli bir kaynak yaratmak, arama motorları için optimize edilmiş bir yapı kurmak ve uzun vadede sürdürülebilir, saygın bir dijital varlık inşa etmektir. Bu hedefe ulaştığınızda, AdSense onayı ve ondan elde edilecek gelir, bu çabaların bir ödülü olarak gelecektir.
+
+Son olarak, AdSense politikalarının ve Google'ın kalite algısının statik olmadığını unutmamak gerekir. Arama algoritmaları ve program politikaları sürekli olarak güncellenmektedir. Bu nedenle, bir yayıncı olarak güncel kalmak, sitenizi düzenli olarak denetlemek ve en iyi uygulamaları takip etmek, sadece onay almak için değil, aynı zamanda onaylanmış bir hesabın sağlığını ve gelir potansiyelini korumak için de esastır. Bu raporu bir başlangıç noktası olarak kullanarak, sitenizi bu ilkelere göre yapılandırabilir ve AdSense programının değerli bir ortağı olma yolunda sağlam adımlarla ilerleyebilirsiniz.   
+

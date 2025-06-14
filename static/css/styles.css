@@ -3023,3 +3023,160 @@ header p.lead {
 .plan-controls .btn-control {
     margin-bottom: 10px;
 }
+
+/* Yeni eklenen adımlar için CSS stilleri */
+
+/* Travel Group Options */
+.travel-group-options .row {
+    margin: 0 -10px;
+}
+
+.travel-group-option {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.travel-group-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.travel-group-option.selected {
+    border: 2px solid #5f27cd;
+    background-color: rgba(95, 39, 205, 0.05);
+}
+
+.group-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #5f27cd;
+}
+
+.group-details h5 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.group-details p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Cities Options */
+.cities-options .row {
+    margin: 0 -10px;
+}
+
+.cities-option {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.cities-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cities-option.selected {
+    border: 2px solid #5f27cd;
+}
+
+.cities-image {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.seoul-image {
+    background-image: url('https://images.unsplash.com/photo-1517154421773-0529f29ea451?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+}
+
+.seoul-busan-image {
+    background-image: url('https://images.unsplash.com/photo-1601541984851-7bb28a966d42?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+}
+
+.seoul-jeju-image {
+    background-image: url('https://images.unsplash.com/photo-1589892887493-e7d4b8d0d89c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+}
+
+.history-tour-image {
+    background-image: url('https://images.unsplash.com/photo-1580651315530-69c8e0026377?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+}
+
+.grand-tour-image {
+    background-image: url('https://images.unsplash.com/photo-1540998145333-e2eef1a9822d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+}
+
+.cities-details {
+    padding: 15px;
+}
+
+.cities-details h5 {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.cities-details p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Travel Pace Options */
+.travel-pace-options .row {
+    margin: 0 -10px;
+}
+
+.travel-pace-option {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.travel-pace-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.travel-pace-option.selected {
+    border: 2px solid #5f27cd;
+    background-color: rgba(95, 39, 205, 0.05);
+}
+
+.pace-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #5f27cd;
+}
+
+.pace-details h5 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.pace-details p {
+    font-size: 0.9rem;
+    color: #666;
+}
